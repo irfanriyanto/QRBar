@@ -622,15 +622,15 @@ textarea.input {
 }
 
 .phone-frame {
-  width: 330px;
-  height: 680px;
-  background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
-  border-radius: 52px;
-  padding: 3px;
+  width: 340px;
+  height: 700px;
+  background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+  border-radius: 50px;
+  padding: 12px;
   box-shadow: 
-    0 60px 120px rgba(0, 0, 0, 0.7),
-    0 0 0 1px rgba(80, 80, 80, 0.3),
-    inset 0 2px 4px rgba(255, 255, 255, 0.08);
+    0 60px 120px rgba(0, 0, 0, 0.8),
+    0 0 0 2px rgba(60, 60, 60, 0.5),
+    inset 0 2px 4px rgba(255, 255, 255, 0.05);
   position: relative;
 }
 
@@ -641,8 +641,8 @@ textarea.input {
   left: 0;
   right: 0;
   bottom: 0;
-  border-radius: 52px;
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.02));
+  border-radius: 50px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.01));
   -webkit-mask: 
     linear-gradient(#fff 0 0) content-box, 
     linear-gradient(#fff 0 0);
@@ -657,18 +657,18 @@ textarea.input {
 
 .phone-notch {
   position: absolute;
-  top: 18px;
+  top: 22px;
   left: 50%;
   transform: translateX(-50%);
-  width: 8px;
-  height: 8px;
-  background: radial-gradient(circle, #0d0d1a 0%, #000000 100%);
+  width: 9px;
+  height: 9px;
+  background: radial-gradient(circle, #0a0a15 0%, #000000 100%);
   border-radius: 50%;
   z-index: 10;
   box-shadow: 
-    0 0 0 1.5px rgba(0, 0, 0, 0.4),
-    0 0 6px rgba(0, 0, 0, 0.6),
-    inset 0 1px 2px rgba(80, 80, 150, 0.25);
+    0 0 0 2px rgba(0, 0, 0, 0.5),
+    0 0 8px rgba(0, 0, 0, 0.7),
+    inset 0 1px 2px rgba(80, 80, 150, 0.3);
 }
 
 .phone-notch::before {
@@ -679,31 +679,31 @@ textarea.input {
   transform: translate(-50%, -50%);
   width: 5px;
   height: 5px;
-  background: radial-gradient(circle, rgba(40, 40, 80, 0.7) 0%, rgba(15, 15, 30, 0.9) 100%);
+  background: radial-gradient(circle, rgba(40, 40, 80, 0.8) 0%, rgba(15, 15, 30, 0.95) 100%);
   border-radius: 50%;
 }
 
 .phone-screen {
   width: 100%;
   height: 100%;
-  background: #F5F5F5;
-  border-radius: 49px;
+  background: #F8F8F8;
+  border-radius: 40px;
   overflow: hidden;
   position: relative;
   box-shadow: 
-    inset 0 0 0 1px rgba(0, 0, 0, 0.03),
-    0 2px 16px rgba(0, 0, 0, 0.06);
+    inset 0 0 0 1px rgba(0, 0, 0, 0.04),
+    0 2px 16px rgba(0, 0, 0, 0.08);
 }
 
 .phone-statusbar {
-  height: 40px;
+  height: 44px;
   background: transparent;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 22px;
-  padding-top: 6px;
-  font-size: 13px;
+  padding: 0 24px;
+  padding-top: 8px;
+  font-size: 14px;
   font-weight: 600;
   color: #1a1a1a;
   position: relative;
@@ -713,28 +713,28 @@ textarea.input {
 .phone-time {
   font-weight: 700;
   letter-spacing: -0.4px;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .phone-icons {
   display: flex;
-  gap: 4px;
+  gap: 5px;
   align-items: center;
 }
 
 .phone-icons svg {
   opacity: 0.9;
-  width: 15px;
-  height: 15px;
+  width: 16px;
+  height: 16px;
 }
 
 .phone-content {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(100% - 40px);
+  height: calc(100% - 44px);
   padding: 30px 20px;
-  background: #F5F5F5;
+  background: #F8F8F8;
 }
 
 .barcode-container {
@@ -742,35 +742,35 @@ textarea.input {
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 250px;
+  max-width: 260px;
 }
 
 /* Light Mode Phone */
 body.light-mode .phone-frame {
-  background: linear-gradient(145deg, #e8e8e8, #f8f8f8);
+  background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
   box-shadow: 
-    0 60px 120px rgba(0, 0, 0, 0.12),
-    0 0 0 1px rgba(0, 0, 0, 0.08),
-    inset 0 2px 4px rgba(255, 255, 255, 0.95);
+    0 60px 120px rgba(0, 0, 0, 0.5),
+    0 0 0 2px rgba(60, 60, 60, 0.4),
+    inset 0 2px 4px rgba(255, 255, 255, 0.05);
 }
 
 body.light-mode .phone-frame::before {
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.5));
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.01));
 }
 
 body.light-mode .phone-notch {
-  background: radial-gradient(circle, #1a1a2a 0%, #0a0a1a 100%);
+  background: radial-gradient(circle, #0a0a15 0%, #000000 100%);
   box-shadow: 
-    0 0 0 1.5px rgba(0, 0, 0, 0.25),
-    0 0 6px rgba(0, 0, 0, 0.4),
-    inset 0 1px 2px rgba(80, 80, 150, 0.3);
+    0 0 0 2px rgba(0, 0, 0, 0.5),
+    0 0 8px rgba(0, 0, 0, 0.6),
+    inset 0 1px 2px rgba(80, 80, 150, 0.35);
 }
 
 body.light-mode .phone-screen {
-  background: #F5F5F5;
+  background: #F8F8F8;
   box-shadow: 
     inset 0 0 0 1px rgba(0, 0, 0, 0.05),
-    0 2px 16px rgba(0, 0, 0, 0.04);
+    0 2px 16px rgba(0, 0, 0, 0.06);
 }
 
 body.light-mode .phone-statusbar {
@@ -1208,40 +1208,40 @@ body.light-mode .footer {
   }
   
   .phone-frame {
-    width: 270px;
-    height: 560px;
+    width: 280px;
+    height: 580px;
     border-radius: 42px;
-    padding: 2.5px;
+    padding: 10px;
   }
   
   .phone-notch {
-    width: 7px;
-    height: 7px;
-    top: 15px;
+    width: 8px;
+    height: 8px;
+    top: 18px;
   }
   
   .phone-screen {
-    border-radius: 39px;
+    border-radius: 34px;
   }
   
   .phone-statusbar {
-    height: 36px;
-    padding: 0 18px;
-    font-size: 12px;
-  }
-  
-  .phone-time {
+    height: 38px;
+    padding: 0 20px;
     font-size: 13px;
   }
   
+  .phone-time {
+    font-size: 14px;
+  }
+  
   .phone-icons svg {
-    width: 13px;
-    height: 13px;
+    width: 14px;
+    height: 14px;
   }
   
   .phone-content {
     padding: 25px 15px;
-    height: calc(100% - 36px);
+    height: calc(100% - 38px);
   }
   
   .phone-content canvas {
