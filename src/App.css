@@ -604,14 +604,132 @@ textarea.input {
 }
 
 .preview-wrapper-gen {
-  background: rgba(255, 255, 255, 0.95);
+  background: transparent;
   padding: 3rem;
   border-radius: 16px;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 350px;
-  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1);
+  min-height: 600px;
+}
+
+/* Phone Mockup - Samsung Galaxy S25 Style */
+.phone-mockup {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.phone-frame {
+  width: 320px;
+  height: 650px;
+  background: linear-gradient(145deg, #1a1a1a, #2d2d2d);
+  border-radius: 45px;
+  padding: 12px;
+  box-shadow: 
+    0 30px 60px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.phone-notch {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 28px;
+  background: #000000;
+  border-radius: 0 0 20px 20px;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.phone-notch::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 8px;
+  background: #1a1a2e;
+  border-radius: 50%;
+  box-shadow: 0 0 4px rgba(100, 100, 255, 0.3);
+}
+
+.phone-screen {
+  width: 100%;
+  height: 100%;
+  background: #FFFFFF;
+  border-radius: 38px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.phone-statusbar {
+  height: 50px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.02) 0%, transparent 100%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  padding-top: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.phone-time {
+  font-weight: 600;
+}
+
+.phone-icons {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.phone-icons svg {
+  opacity: 0.8;
+}
+
+.phone-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100% - 50px);
+  padding: 20px;
+  background: #FFFFFF;
+}
+
+.barcode-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+/* Light Mode Phone */
+body.light-mode .phone-frame {
+  background: linear-gradient(145deg, #e0e0e0, #f5f5f5);
+  box-shadow: 
+    0 30px 60px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .phone-screen {
+  background: #FFFFFF;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+body.light-mode .phone-statusbar {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.01) 0%, transparent 100%);
+  color: #1a1a1a;
 }
 
 @media (max-width: 768px) {
@@ -1042,5 +1160,36 @@ body.light-mode .footer {
   .language-select {
     font-size: 0.85rem;
     padding: 0.4rem 0.6rem;
+  }
+  
+  .phone-frame {
+    width: 280px;
+    height: 570px;
+    border-radius: 40px;
+    padding: 10px;
+  }
+  
+  .phone-notch {
+    width: 90px;
+    height: 26px;
+    top: 18px;
+  }
+  
+  .phone-screen {
+    border-radius: 34px;
+  }
+  
+  .phone-content {
+    padding: 15px;
+  }
+  
+  .phone-content canvas {
+    max-width: 200px !important;
+    max-height: 200px !important;
+  }
+  
+  .preview-wrapper-gen {
+    padding: 2rem 1rem;
+    min-height: 500px;
   }
 }

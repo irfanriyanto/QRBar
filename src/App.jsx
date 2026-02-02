@@ -438,11 +438,33 @@ function App() {
           <div className="preview-card-gen">
             <h3 className="section-title">{t.preview}</h3>
             <div className="preview-wrapper-gen">
-              {codeFormat === 'qr' ? (
-                <QRCodeCanvas value={generateData()} size={280} level="H" includeMargin={true} />
-              ) : (
-                <Barcode value={generateData()} format={barcodeFormat} width={2} height={100} displayValue={true} />
-              )}
+              <div className="phone-mockup">
+                <div className="phone-frame">
+                  <div className="phone-notch"></div>
+                  <div className="phone-screen">
+                    <div className="phone-statusbar">
+                      <span className="phone-time">9:41</span>
+                      <div className="phone-icons">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/>
+                        </svg>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z"/>
+                        </svg>
+                      </div>
+                    </div>
+                    <div className="phone-content">
+                      {codeFormat === 'qr' ? (
+                        <QRCodeCanvas value={generateData()} size={240} level="H" includeMargin={true} />
+                      ) : (
+                        <div className="barcode-container">
+                          <Barcode value={generateData()} format={barcodeFormat} width={1.5} height={80} displayValue={true} fontSize={14} />
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
