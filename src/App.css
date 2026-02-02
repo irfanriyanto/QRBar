@@ -880,63 +880,63 @@ body.light-mode .phone-statusbar {
   }
   
   .hero-visual {
-    height: 280px;
+    height: 300px;
     margin-top: 2rem;
   }
   
   .floating-qr {
-    transform: scale(0.75);
+    transform: scale(0.7);
   }
   
-  /* Center all QR codes in mobile */
+  /* Scattered but centered positioning */
   .qr-1 {
-    top: 15%;
-    left: 50%;
+    top: 20%;
+    left: 55%;
     right: auto;
-    transform: translateX(-50%) scale(0.75);
+    transform: translateX(-50%) scale(0.7);
     animation: floatMobile1 6s ease-in-out infinite alternate;
   }
   
   .qr-2 {
-    top: 50%;
-    left: 50%;
+    top: 55%;
+    left: 35%;
     right: auto;
-    transform: translate(-50%, -50%) scale(0.75);
+    transform: translateX(-50%) scale(0.7);
     animation: floatMobile2 7s ease-in-out infinite alternate;
   }
   
   .qr-3 {
-    bottom: 15%;
-    left: 50%;
+    bottom: 18%;
+    left: 60%;
     right: auto;
-    transform: translateX(-50%) scale(0.75);
+    transform: translateX(-50%) scale(0.7);
     animation: floatMobile3 8s ease-in-out infinite alternate;
   }
   
   @keyframes floatMobile1 {
     0%, 100% {
-      transform: translateX(-50%) translateY(0) scale(0.75);
+      transform: translateX(-50%) translateY(0) rotate(0deg) scale(0.7);
     }
     50% {
-      transform: translateX(-50%) translateY(-15px) scale(0.75);
+      transform: translateX(-50%) translateY(-12px) rotate(3deg) scale(0.7);
     }
   }
   
   @keyframes floatMobile2 {
     0%, 100% {
-      transform: translate(-50%, -50%) translateY(0) scale(0.75);
+      transform: translateX(-50%) translateY(0) rotate(0deg) scale(0.7);
     }
     50% {
-      transform: translate(-50%, -50%) translateY(15px) scale(0.75);
+      transform: translateX(-50%) translateY(15px) rotate(-4deg) scale(0.7);
     }
   }
   
   @keyframes floatMobile3 {
     0%, 100% {
-      transform: translateX(-50%) translateY(0) scale(0.75);
+      transform: translateX(-50%) translateY(0) rotate(0deg) scale(0.7);
     }
     50% {
-      transform: translateX(-50%) translateY(-10px) scale(0.75);
+      transform: translateX(-50%) translateY(-10px) rotate(2deg) scale(0.7);
     }
   }
   
