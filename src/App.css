@@ -874,6 +874,13 @@ body.light-mode .type-card-gen:hover {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
+body.light-mode .type-card-landing:hover .type-icon-landing,
+body.light-mode .type-card-gen:hover .type-icon-gen {
+  background: rgba(107, 114, 128, 0.15);
+  color: #111827;
+  border-color: rgba(107, 114, 128, 0.2);
+}
+
 body.light-mode .type-card-gen.active {
   border-color: #6B7280;
   background: rgba(107, 114, 128, 0.05);
