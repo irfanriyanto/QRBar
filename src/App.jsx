@@ -163,7 +163,15 @@ function App() {
           return locationAddress ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(locationAddress)}` : 'https://maps.google.com';
         }
       case 'whatsapp':
-        const cleanPhone = waPhone.replace(/[^0-9]/g, '');
+        let cleanPhone = waPhone.replace(/[^0-9]/g, '');
+        // Auto-convert Indonesian format: if starts with 0, replace with 62
+        if (cleanPhone.startsWith('0')) {
+          cleanPhone = '62' + cleanPhone.substring(1);
+        }
+        // If no country code detected (less than 11 digits), assume Indonesia
+        if (cleanPhone.length < 11) {
+          cleanPhone = '62' + cleanPhone;
+        }
         return waMessage 
           ? `https://wa.me/${cleanPhone}?text=${encodeURIComponent(waMessage)}`
           : `https://wa.me/${cleanPhone}`;
@@ -399,7 +407,8 @@ function App() {
           <>
             <div className="form-group">
               <label className="label">{t.waPhoneNumber}</label>
-              <input type="tel" value={waPhone} onChange={(e) => setWaPhone(e.target.value)} className="input" placeholder="+62812345678" />
+              <input type="tel" value={waPhone} onChange={(e) => setWaPhone(e.target.value)} className="input" placeholder="087766414191 or +6287766414191" />
+              <small style={{color: '#9CA3AF', fontSize: '0.875rem', marginTop: '0.25rem', display: 'block'}}>Format: 08xxx or +628xxx (auto-converted)</small>
             </div>
             <div className="form-group">
               <label className="label">{t.waMessage}</label>
