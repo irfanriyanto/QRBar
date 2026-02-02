@@ -654,15 +654,55 @@ function LandingPage({ onGetStarted, onSelectType, qrTypes, darkMode, setDarkMod
 
       <section className="hero">
         <div className="hero-content">
-          <h1 className="hero-title">{t.heroTitle}</h1>
-          <p className="hero-subtitle">{t.heroSubtitle}</p>
-          <button onClick={onGetStarted} className="btn-hero">
-            {t.createButton}
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <line x1="5" y1="12" x2="19" y2="12"/>
-              <polyline points="12 5 19 12 12 19"/>
-            </svg>
-          </button>
+          <div className="hero-text">
+            <h1 className="hero-title">{t.heroTitle}</h1>
+            <p className="hero-subtitle">{t.heroSubtitle}</p>
+            <button onClick={onGetStarted} className="btn-hero">
+              {t.createButton}
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
+              </svg>
+            </button>
+          </div>
+          <div className="hero-visual">
+            <div className="floating-qr qr-1">
+              <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
+                <rect width="120" height="120" rx="12" fill="rgba(255, 255, 255, 0.1)" className="qr-bg"/>
+                <rect x="15" y="15" width="35" height="35" rx="4" fill="currentColor"/>
+                <rect x="70" y="15" width="35" height="35" rx="4" fill="currentColor"/>
+                <rect x="15" y="70" width="35" height="35" rx="4" fill="currentColor"/>
+                <rect x="75" y="75" width="25" height="25" rx="3" fill="currentColor"/>
+                <rect x="22" y="22" width="21" height="21" rx="2" fill="rgba(10, 10, 10, 0.9)"/>
+                <rect x="77" y="22" width="21" height="21" rx="2" fill="rgba(10, 10, 10, 0.9)"/>
+                <rect x="22" y="77" width="21" height="21" rx="2" fill="rgba(10, 10, 10, 0.9)"/>
+              </svg>
+            </div>
+            <div className="floating-qr qr-2">
+              <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+                <rect width="100" height="100" rx="10" fill="rgba(255, 255, 255, 0.08)" className="qr-bg"/>
+                <rect x="12" y="12" width="30" height="30" rx="3" fill="currentColor"/>
+                <rect x="58" y="12" width="30" height="30" rx="3" fill="currentColor"/>
+                <rect x="12" y="58" width="30" height="30" rx="3" fill="currentColor"/>
+                <rect x="62" y="62" width="22" height="22" rx="2" fill="currentColor"/>
+                <rect x="18" y="18" width="18" height="18" rx="2" fill="rgba(10, 10, 10, 0.9)"/>
+                <rect x="64" y="18" width="18" height="18" rx="2" fill="rgba(10, 10, 10, 0.9)"/>
+                <rect x="18" y="64" width="18" height="18" rx="2" fill="rgba(10, 10, 10, 0.9)"/>
+              </svg>
+            </div>
+            <div className="floating-qr qr-3">
+              <svg width="90" height="90" viewBox="0 0 90 90" fill="none">
+                <rect width="90" height="90" rx="9" fill="rgba(255, 255, 255, 0.06)" className="qr-bg"/>
+                <rect x="10" y="10" width="28" height="28" rx="3" fill="currentColor"/>
+                <rect x="52" y="10" width="28" height="28" rx="3" fill="currentColor"/>
+                <rect x="10" y="52" width="28" height="28" rx="3" fill="currentColor"/>
+                <rect x="56" y="56" width="20" height="20" rx="2" fill="currentColor"/>
+                <rect x="16" y="16" width="16" height="16" rx="2" fill="rgba(10, 10, 10, 0.9)"/>
+                <rect x="58" y="16" width="16" height="16" rx="2" fill="rgba(10, 10, 10, 0.9)"/>
+                <rect x="16" y="58" width="16" height="16" rx="2" fill="rgba(10, 10, 10, 0.9)"/>
+              </svg>
+            </div>
+          </div>
         </div>
       </section>
 
