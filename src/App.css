@@ -526,6 +526,12 @@ select.input {
   font-family: inherit;
 }
 
+select.input option {
+  background: #1F2937;
+  color: #FFFFFF;
+  padding: 0.5rem;
+}
+
 .input::placeholder,
 textarea.input::placeholder {
   color: #6B7280;
@@ -1068,6 +1074,11 @@ body.light-mode textarea.input,
 body.light-mode select.input {
   background: #F9FAFB;
   border: 1px solid #E5E7EB;
+  color: #111827;
+}
+
+body.light-mode select.input option {
+  background: #FFFFFF;
   color: #111827;
 }
 
