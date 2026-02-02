@@ -881,7 +881,7 @@ body.light-mode .phone-statusbar {
   
   .hero-visual {
     height: 300px;
-    margin-top: 2rem;
+    margin-top: 0.5rem;
   }
   
   .floating-qr {
@@ -890,7 +890,7 @@ body.light-mode .phone-statusbar {
   
   /* Scattered but centered positioning */
   .qr-1 {
-    top: 20%;
+    top: 10%;
     left: 55%;
     right: auto;
     transform: translateX(-50%) scale(0.7);
@@ -898,7 +898,7 @@ body.light-mode .phone-statusbar {
   }
   
   .qr-2 {
-    top: 55%;
+    top: 45%;
     left: 35%;
     right: auto;
     transform: translateX(-50%) scale(0.7);
@@ -906,7 +906,7 @@ body.light-mode .phone-statusbar {
   }
   
   .qr-3 {
-    bottom: 18%;
+    bottom: 25%;
     left: 60%;
     right: auto;
     transform: translateX(-50%) scale(0.7);
