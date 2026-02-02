@@ -596,7 +596,7 @@ function LandingPage({ onGetStarted, onSelectType, qrTypes, darkMode, setDarkMod
       </section>
 
       <footer className="footer">
-        <p>{t.footer}</p>
+        <p>© 2026 QRBar. All rights reserved.</p>
       </footer>
     </div>
   );

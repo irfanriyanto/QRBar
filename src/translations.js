@@ -15,7 +15,6 @@ export const translations = {
     step3Desc: "Get your QR code in high quality PNG format, ready to use anywhere",
     ctaTitle: "Ready to create your QR code?",
     ctaSubtitle: "Start generating professional QR codes in seconds",
-    footer: "© 2026 QRBar. All rights reserved.",
     
     // Generator Page
     backToHome: "Back to Home",
@@ -96,7 +95,6 @@ export const translations = {
     step3Desc: "Dapatkan kode QR Anda dalam format PNG kualitas tinggi, siap digunakan",
     ctaTitle: "Siap membuat kode QR Anda?",
     ctaSubtitle: "Mulai generate kode QR profesional dalam hitungan detik",
-    footer: "© 2026 QRBar. Hak cipta dilindungi.",
     
     // Generator Page
     backToHome: "Kembali ke Beranda",
