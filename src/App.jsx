@@ -32,6 +32,17 @@ function App() {
   const [vcardPhone, setVcardPhone] = useState('');
   const [vcardEmail, setVcardEmail] = useState('');
   const [vcardOrg, setVcardOrg] = useState('');
+  const [locationType, setLocationType] = useState('coordinates');
+  const [latitude, setLatitude] = useState('');
+  const [longitude, setLongitude] = useState('');
+  const [locationAddress, setLocationAddress] = useState('');
+  const [waPhone, setWaPhone] = useState('');
+  const [waMessage, setWaMessage] = useState('');
+  const [paymentType, setPaymentType] = useState('link');
+  const [paymentLink, setPaymentLink] = useState('');
+  const [upiId, setUpiId] = useState('');
+  const [paymentAmount, setPaymentAmount] = useState('');
+  const [paymentNote, setPaymentNote] = useState('');
   const [barcodeFormat, setBarcodeFormat] = useState('CODE128');
   
   const downloadRef = useRef(null);
@@ -97,6 +108,24 @@ function App() {
       desc: t.vcardDesc,
       icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
     },
+    { 
+      id: 'location', 
+      name: t.location, 
+      desc: t.locationDesc,
+      icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    },
+    { 
+      id: 'whatsapp', 
+      name: t.whatsapp, 
+      desc: t.whatsappDesc,
+      icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+    },
+    { 
+      id: 'payment', 
+      name: t.payment, 
+      desc: t.paymentDesc,
+      icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+    },
   ];
 
   const generateData = () => {
@@ -127,6 +156,23 @@ function App() {
         return `${loginUsername}\t${loginPassword}\n`;
       case 'vcard':
         return `BEGIN:VCARD\nVERSION:3.0\nFN:${vcardName}\nTEL:${vcardPhone}\nEMAIL:${vcardEmail}\nORG:${vcardOrg}\nEND:VCARD`;
+      case 'location':
+        if (locationType === 'coordinates') {
+          return latitude && longitude ? `geo:${latitude},${longitude}` : 'geo:0,0';
+        } else {
+          return locationAddress ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(locationAddress)}` : 'https://maps.google.com';
+        }
+      case 'whatsapp':
+        const cleanPhone = waPhone.replace(/[^0-9]/g, '');
+        return waMessage 
+          ? `https://wa.me/${cleanPhone}?text=${encodeURIComponent(waMessage)}`
+          : `https://wa.me/${cleanPhone}`;
+      case 'payment':
+        if (paymentType === 'upi') {
+          return `upi://pay?pa=${upiId}&pn=QRBar&am=${paymentAmount}&cu=IDR&tn=${encodeURIComponent(paymentNote)}`;
+        } else {
+          return paymentLink || 'https://example.com/payment';
+        }
       default:
         return 'QRBar Generator';
     }
@@ -167,6 +213,15 @@ function App() {
     setVcardPhone('');
     setVcardEmail('');
     setVcardOrg('');
+    setLatitude('');
+    setLongitude('');
+    setLocationAddress('');
+    setWaPhone('');
+    setWaMessage('');
+    setPaymentLink('');
+    setUpiId('');
+    setPaymentAmount('');
+    setPaymentNote('');
   };
 
   if (!showGenerator) {
@@ -308,6 +363,81 @@ function App() {
               <label className="label">Organization</label>
               <input type="text" value={vcardOrg} onChange={(e) => setVcardOrg(e.target.value)} className="input" placeholder="Company Name" />
             </div>
+          </>
+        );
+      case 'location':
+        return (
+          <>
+            <div className="form-group">
+              <label className="label">{t.locationType}</label>
+              <select value={locationType} onChange={(e) => setLocationType(e.target.value)} className="input">
+                <option value="coordinates">{t.coordinates}</option>
+                <option value="address">{t.googleMaps}</option>
+              </select>
+            </div>
+            {locationType === 'coordinates' ? (
+              <>
+                <div className="form-group">
+                  <label className="label">{t.latitude}</label>
+                  <input type="text" value={latitude} onChange={(e) => setLatitude(e.target.value)} className="input" placeholder="-6.200000" />
+                </div>
+                <div className="form-group">
+                  <label className="label">{t.longitude}</label>
+                  <input type="text" value={longitude} onChange={(e) => setLongitude(e.target.value)} className="input" placeholder="106.816666" />
+                </div>
+              </>
+            ) : (
+              <div className="form-group">
+                <label className="label">{t.address}</label>
+                <textarea value={locationAddress} onChange={(e) => setLocationAddress(e.target.value)} className="input" placeholder="Monas, Jakarta" rows="3" />
+              </div>
+            )}
+          </>
+        );
+      case 'whatsapp':
+        return (
+          <>
+            <div className="form-group">
+              <label className="label">{t.waPhoneNumber}</label>
+              <input type="tel" value={waPhone} onChange={(e) => setWaPhone(e.target.value)} className="input" placeholder="+62812345678" />
+            </div>
+            <div className="form-group">
+              <label className="label">{t.waMessage}</label>
+              <textarea value={waMessage} onChange={(e) => setWaMessage(e.target.value)} className="input" placeholder="Hello!" rows="3" />
+            </div>
+          </>
+        );
+      case 'payment':
+        return (
+          <>
+            <div className="form-group">
+              <label className="label">{t.paymentType}</label>
+              <select value={paymentType} onChange={(e) => setPaymentType(e.target.value)} className="input">
+                <option value="link">{t.paymentLink}</option>
+                <option value="upi">UPI</option>
+              </select>
+            </div>
+            {paymentType === 'upi' ? (
+              <>
+                <div className="form-group">
+                  <label className="label">{t.upiId}</label>
+                  <input type="text" value={upiId} onChange={(e) => setUpiId(e.target.value)} className="input" placeholder="username@upi" />
+                </div>
+                <div className="form-group">
+                  <label className="label">{t.paymentAmount}</label>
+                  <input type="number" value={paymentAmount} onChange={(e) => setPaymentAmount(e.target.value)} className="input" placeholder="100000" />
+                </div>
+                <div className="form-group">
+                  <label className="label">{t.paymentNote}</label>
+                  <input type="text" value={paymentNote} onChange={(e) => setPaymentNote(e.target.value)} className="input" placeholder="Payment for..." />
+                </div>
+              </>
+            ) : (
+              <div className="form-group">
+                <label className="label">{t.paymentLink}</label>
+                <input type="url" value={paymentLink} onChange={(e) => setPaymentLink(e.target.value)} className="input" placeholder="https://payment.example.com" />
+              </div>
+            )}
           </>
         );
       default:
