@@ -994,6 +994,14 @@ body.light-mode .language-option.active {
   color: #111827;
 }
 
+body.light-mode .label {
+  color: #374151;
+}
+
+body.light-mode .step-title {
+  color: #111827;
+}
+
 body.light-mode .how-section {
   background: #F9FAFB;
   border-top: 1px solid #E5E7EB;
