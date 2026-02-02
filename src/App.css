@@ -880,30 +880,63 @@ body.light-mode .phone-statusbar {
   }
   
   .hero-visual {
-    height: 200px;
+    height: 280px;
     margin-top: 2rem;
   }
   
-  /* Hide QR 2 and 3, only show centered QR 1 */
-  .qr-2,
-  .qr-3 {
-    display: none;
+  .floating-qr {
+    transform: scale(0.75);
   }
   
+  /* Center all QR codes in mobile */
   .qr-1 {
+    top: 15%;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%) scale(0.75);
+    animation: floatMobile1 6s ease-in-out infinite alternate;
+  }
+  
+  .qr-2 {
     top: 50%;
     left: 50%;
     right: auto;
-    transform: translate(-50%, -50%) scale(1);
-    animation: floatMobile 5s ease-in-out infinite alternate;
+    transform: translate(-50%, -50%) scale(0.75);
+    animation: floatMobile2 7s ease-in-out infinite alternate;
   }
   
-  @keyframes floatMobile {
+  .qr-3 {
+    bottom: 15%;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%) scale(0.75);
+    animation: floatMobile3 8s ease-in-out infinite alternate;
+  }
+  
+  @keyframes floatMobile1 {
     0%, 100% {
-      transform: translate(-50%, -50%) translateY(0);
+      transform: translateX(-50%) translateY(0) scale(0.75);
     }
     50% {
-      transform: translate(-50%, -50%) translateY(-15px);
+      transform: translateX(-50%) translateY(-15px) scale(0.75);
+    }
+  }
+  
+  @keyframes floatMobile2 {
+    0%, 100% {
+      transform: translate(-50%, -50%) translateY(0) scale(0.75);
+    }
+    50% {
+      transform: translate(-50%, -50%) translateY(15px) scale(0.75);
+    }
+  }
+  
+  @keyframes floatMobile3 {
+    0%, 100% {
+      transform: translateX(-50%) translateY(0) scale(0.75);
+    }
+    50% {
+      transform: translateX(-50%) translateY(-10px) scale(0.75);
     }
   }
   
