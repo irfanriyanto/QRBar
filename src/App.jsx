@@ -458,7 +458,7 @@ function App() {
     <div className="generator-page">
       <nav className="nav">
         <div className="nav-content">
-          <div className="logo">
+          <div className="logo" onClick={() => setShowGenerator(false)} style={{cursor: 'pointer'}}>
             <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
               <rect x="4" y="4" width="10" height="10" rx="2" fill="url(#logoGrad)"/>
               <rect x="18" y="4" width="10" height="10" rx="2" fill="url(#logoGrad)"/>
@@ -627,7 +627,7 @@ function LandingPage({ onGetStarted, onSelectType, qrTypes, darkMode, setDarkMod
     <div className="landing-page">
       <nav className="nav">
         <div className="nav-content">
-          <div className="logo">
+          <div className="logo" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} style={{cursor: 'pointer'}}>
             <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
               <rect x="4" y="4" width="10" height="10" rx="2" fill="url(#logoGradient)"/>
               <rect x="18" y="4" width="10" height="10" rx="2" fill="url(#logoGradient)"/>
