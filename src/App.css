@@ -872,7 +872,7 @@ body.light-mode .phone-statusbar {
 @media (max-width: 768px) {
   .hero-content {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 3rem;
   }
   
   .hero-text {
@@ -880,26 +880,31 @@ body.light-mode .phone-statusbar {
   }
   
   .hero-visual {
-    height: 300px;
+    height: 200px;
+    margin-top: 2rem;
   }
   
-  .floating-qr {
-    transform: scale(0.8);
+  /* Hide QR 2 and 3, only show centered QR 1 */
+  .qr-2,
+  .qr-3 {
+    display: none;
   }
   
   .qr-1 {
-    top: 5%;
-    right: 10%;
+    top: 50%;
+    left: 50%;
+    right: auto;
+    transform: translate(-50%, -50%) scale(1);
+    animation: floatMobile 5s ease-in-out infinite alternate;
   }
   
-  .qr-2 {
-    top: 45%;
-    right: 0%;
-  }
-  
-  .qr-3 {
-    bottom: 10%;
-    right: 15%;
+  @keyframes floatMobile {
+    0%, 100% {
+      transform: translate(-50%, -50%) translateY(0);
+    }
+    50% {
+      transform: translate(-50%, -50%) translateY(-15px);
+    }
   }
   
   .hero-title {
