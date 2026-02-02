@@ -24,7 +24,7 @@
 - Indonesian (ID)
 - Easy to add more languages
 
-### 📱 9 QR Code Types
+### 📱 12 Code Types
 1. **Plain Text** - Simple text messages
 2. **Website URL** - Direct links to any website
 3. **WiFi** - Network credentials for easy connection
@@ -34,6 +34,9 @@
 7. **Social Media** - Instagram, Twitter, Facebook, TikTok, LinkedIn, YouTube
 8. **Login** - Username & password (with TAB auto-fill support)
 9. **vCard** - Complete contact information
+10. **Location/Maps** - GPS coordinates or Google Maps address
+11. **WhatsApp** - Direct WhatsApp chat with pre-filled message
+12. **Payment** - Payment links or UPI format
 
 ### 📊 Barcode Support
 - CODE128
@@ -43,8 +46,10 @@
 
 ### 🎯 Key Capabilities
 - **HD Download** - High-quality PNG export (512px, 5x scale)
-- **Real-time Preview** - See your QR code as you type
+- **Real-time Preview** - See your code as you type
+- **Phone Mockup** - Samsung Galaxy S25 Ultra preview
 - **Auto-fill Login** - Special format for scanner auto-fill (username[TAB]password)
+- **WhatsApp Auto-format** - Automatically converts Indonesian phone format (08xxx → 628xxx)
 - **Clean Export** - Download contains only QR/Barcode without UI elements
 
 ---
