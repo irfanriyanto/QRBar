@@ -407,7 +407,7 @@ function App() {
           <>
             <div className="form-group">
               <label className="label">{t.waPhoneNumber}</label>
-              <input type="tel" value={waPhone} onChange={(e) => setWaPhone(e.target.value)} className="input" placeholder="087766414191 or +6287766414191" />
+              <input type="tel" value={waPhone} onChange={(e) => setWaPhone(e.target.value)} className="input" placeholder="081234567890 or +6281234567890" />
               <small style={{color: '#9CA3AF', fontSize: '0.875rem', marginTop: '0.25rem', display: 'block'}}>Format: 08xxx or +628xxx (auto-converted)</small>
             </div>
             <div className="form-group">
