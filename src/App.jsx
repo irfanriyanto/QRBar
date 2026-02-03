@@ -57,6 +57,7 @@ function App() {
   const [gradientColor1, setGradientColor1] = useState('#000000');
   const [gradientColor2, setGradientColor2] = useState('#4B5563');
   const [frameStyle, setFrameStyle] = useState('none'); // none, banner, box, circular
+  const [frameText, setFrameText] = useState('Scan me!');
   const [logoTab, setLogoTab] = useState('preset'); // preset or custom
   
   const downloadRef = useRef(null);
@@ -1127,6 +1128,72 @@ function App() {
                   </button>
                 </div>
               </div>
+
+              <div className="form-group">
+                <label className="label">{t.frame}</label>
+                <div className="style-options">
+                  <button 
+                    onClick={() => setFrameStyle('none')} 
+                    className={`style-btn ${frameStyle === 'none' ? 'active' : ''}`}
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <line x1="18" y1="6" x2="6" y2="18"/>
+                    </svg>
+                    <span>{t.noFrame}</span>
+                  </button>
+                  <button 
+                    onClick={() => setFrameStyle('bottom')} 
+                    className={`style-btn ${frameStyle === 'bottom' ? 'active' : ''}`}
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                      <rect x="4" y="4" width="16" height="16" rx="2" fill="none" stroke="currentColor" strokeWidth="2"/>
+                      <rect x="4" y="16" width="16" height="4" rx="0 0 2 2"/>
+                    </svg>
+                    <span>{t.frameBottom}</span>
+                  </button>
+                  <button 
+                    onClick={() => setFrameStyle('top')} 
+                    className={`style-btn ${frameStyle === 'top' ? 'active' : ''}`}
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                      <rect x="4" y="4" width="16" height="16" rx="2" fill="none" stroke="currentColor" strokeWidth="2"/>
+                      <rect x="4" y="4" width="16" height="4" rx="2 2 0 0"/>
+                    </svg>
+                    <span>{t.frameTop}</span>
+                  </button>
+                  <button 
+                    onClick={() => setFrameStyle('rounded')} 
+                    className={`style-btn ${frameStyle === 'rounded' ? 'active' : ''}`}
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <rect x="4" y="4" width="16" height="16" rx="8"/>
+                    </svg>
+                    <span>{t.frameRounded}</span>
+                  </button>
+                  <button 
+                    onClick={() => setFrameStyle('bold')} 
+                    className={`style-btn ${frameStyle === 'bold' ? 'active' : ''}`}
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4">
+                      <rect x="4" y="4" width="16" height="16" rx="2"/>
+                    </svg>
+                    <span>{t.frameBold}</span>
+                  </button>
+                </div>
+              </div>
+
+              {frameStyle !== 'none' && (
+                <div className="form-group">
+                  <label className="label">{t.scanMe}</label>
+                  <input 
+                    type="text" 
+                    value={frameText} 
+                    onChange={(e) => setFrameText(e.target.value)}
+                    className="input" 
+                    placeholder="Scan me!"
+                  />
+                </div>
+              )}
             </div>
           )}
 
@@ -1182,6 +1249,8 @@ function App() {
                           gradientType={gradientType}
                           gradientColor1={gradientColor1}
                           gradientColor2={gradientColor2}
+                          frameStyle={frameStyle}
+                          frameText={frameText}
                         />
                       ) : (
                         <div className="barcode-container">

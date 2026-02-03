@@ -60,6 +60,11 @@ export const translations = {
     banner: "Banner",
     box: "Box",
     circular: "Circular",
+    scanMe: "Scan me!",
+    frameBottom: "Frame Bottom",
+    frameTop: "Frame Top",
+    frameRounded: "Frame Rounded",
+    frameBold: "Frame Bold",
     
     // Types
     plainText: "Plain Text",
@@ -193,6 +198,11 @@ export const translations = {
     banner: "Banner",
     box: "Kotak",
     circular: "Lingkaran",
+    scanMe: "Scan me!",
+    frameBottom: "Frame Bawah",
+    frameTop: "Frame Atas",
+    frameRounded: "Frame Bulat",
+    frameBold: "Frame Tebal",
     
     // Types
     plainText: "Teks Biasa",
