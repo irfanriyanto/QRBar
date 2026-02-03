@@ -715,6 +715,25 @@ textarea.input {
   border-radius: 12px;
 }
 
+/* Preset Icons Grid Scrollbar */
+.preset-icons-grid::-webkit-scrollbar {
+  width: 8px;
+}
+
+.preset-icons-grid::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 4px;
+}
+
+.preset-icons-grid::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.preset-icons-grid::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
 .btn-remove-logo {
   display: flex;
   align-items: center;
@@ -1414,6 +1433,18 @@ body.light-mode .upload-btn:hover {
 body.light-mode .logo-preview {
   background: #F9FAFB;
   border: 1px solid #E5E7EB;
+}
+
+body.light-mode .preset-icons-grid::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+body.light-mode .preset-icons-grid::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .preset-icons-grid::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.15);
 }
 
 body.light-mode .btn-remove-logo {

@@ -57,9 +57,74 @@ function App() {
   const [gradientColor1, setGradientColor1] = useState('#000000');
   const [gradientColor2, setGradientColor2] = useState('#4B5563');
   const [frameStyle, setFrameStyle] = useState('none'); // none, banner, box, circular
+  const [logoTab, setLogoTab] = useState('preset'); // preset or custom
   
   const downloadRef = useRef(null);
   const t = translations[language];
+
+  // Preset icons - using SVG data URLs for common social media and apps
+  const presetIcons = [
+    {
+      id: 'instagram',
+      name: 'Instagram',
+      svg: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDUwMCA1MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIiByeD0iMTAwIiBmaWxsPSJ1cmwoI2luc3RhZ3JhbUdyYWQpIi8+CjxwYXRoIGQ9Ik0yNTAgMTAwQzE3Ny45ODIgMTAwIDEwMCAxNzcuOTgyIDEwMCAyNTBDMTAwIDMyMi4wMTggMTc3Ljk4MiA0MDAgMjUwIDQwMEMzMjIuMDE4IDQwMCA0MDAgMzIyLjAxOCA0MDAgMjUwQzQwMCAxNzcuOTgyIDMyMi4wMTggMTAwIDI1MCAxMDBaTTI1MCAzNTBDMjA1LjgxNyAzNTAgMTUwIDI5NC4xODMgMTUwIDI1MEMxNTAgMjA1LjgxNyAyMDUuODE3IDE1MCAyNTAgMTUwQzI5NC4xODMgMTUwIDM1MCAyMDUuODE3IDM1MCAyNTBDMzUwIDI5NC4xODMgMjk0LjE4MyAzNTAgMjUwIDM1MFoiIGZpbGw9IndoaXRlIi8+CjxjaXJjbGUgY3g9IjM1MCIgY3k9IjE1MCIgcj0iMjUiIGZpbGw9IndoaXRlIi8+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9Imluc3RhZ3JhbUdyYWQiIHgxPSIwIiB5MT0iMCIgeDI9IjUwMCIgeTI9IjUwMCI+CjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNGNTgzMjkiLz4KPHN0b3Agb2Zmc2V0PSI1MCUiIHN0b3AtY29sb3I9IiNERDJBN0IiLz4KPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjNTE1QkQ0Ii8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPC9zdmc+'
+    },
+    {
+      id: 'facebook',
+      name: 'Facebook',
+      svg: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDUwMCA1MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIiByeD0iMTAwIiBmaWxsPSIjMTg3N0YyIi8+CjxwYXRoIGQ9Ik0zMDAgNDAwVjI2MEgzNTBMMzYwIDIwMEgzMDBWMTcwQzMwMCAxNTAgMzEwIDE0MCAzMzAgMTQwSDM2MFYxMDBIMzMwQzI4MCAxMDAgMjUwIDEzMCAyNTAgMTgwVjIwMEgyMDBWMjYwSDI1MFY0MDBIMzAwWiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+'
+    },
+    {
+      id: 'twitter',
+      name: 'Twitter/X',
+      svg: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDUwMCA1MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIiByeD0iMTAwIiBmaWxsPSIjMDAwMDAwIi8+CjxwYXRoIGQ9Ik0zMDAgMTUwTDIwMCAzMDBMMzAwIDQwME0yMDAgMTUwTDMwMCAzMDBMMjAwIDQwMCIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSI0MCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+Cjwvc3ZnPg=='
+    },
+    {
+      id: 'youtube',
+      name: 'YouTube',
+      svg: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDUwMCA1MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIiByeD0iMTAwIiBmaWxsPSIjRkYwMDAwIi8+CjxwYXRoIGQ9Ik00MDAgMjUwQzQwMCAxNTAgMzUwIDEwMCAyNTAgMTAwQzE1MCAxMDAgMTAwIDE1MCAxMDAgMjUwQzEwMCAzNTAgMTUwIDQwMCAyNTAgNDAwQzM1MCA0MDAgNDAwIDM1MCA0MDAgMjUwWiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTIyMCAxODBMMzIwIDI1MEwyMjAgMzIwVjE4MFoiIGZpbGw9IiNGRjAwMDAiLz4KPC9zdmc+'
+    },
+    {
+      id: 'whatsapp',
+      name: 'WhatsApp',
+      svg: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDUwMCA1MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIiByeD0iMTAwIiBmaWxsPSIjMjVEMzY2Ii8+CjxwYXRoIGQ9Ik0yNTAgMTAwQzE3Mi4wOCAxMDAgMTEwIDE2Mi4wOCAxMTAgMjQwQzExMCAyNzAgMTIwIDI5NSAxMzUgMzE1TDExNSAzODVMMTg1IDM2NUMyMDUgMzgwIDIzMCAzOTAgMjUwIDM5MEMzMjcuOTIgMzkwIDM5MCAzMjcuOTIgMzkwIDI0MEMzOTAgMTYyLjA4IDMyNy45MiAxMDAgMjUwIDEwMFpNMzIwIDI5MEMyOTAgMzEwIDI3MCAzMjAgMjUwIDMyMEMyMzAgMzIwIDIxMCAzMTAgMTgwIDI5MEwxNzAgMjgwTDE4MCAyNzBDMjAwIDI1MCAyMTAgMjQwIDIxMCAyMjBDMjEwIDIwMCAyMDAgMTkwIDE4MCAxNzBMMTcwIDE2MEwxODAgMTUwQzIxMCAxMzAgMjMwIDEyMCAyNTAgMTIwQzI3MCAxMjAgMjkwIDEzMCAzMjAgMTUwTDMzMCAxNjBMMzIwIDE3MEMzMDAgMTkwIDI5MCAyMDAgMjkwIDIyMEMyOTAgMjQwIDMwMCAyNTAgMzIwIDI3MEwzMzAgMjgwTDMyMCAyOTBaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4='
+    },
+    {
+      id: 'tiktok',
+      name: 'TikTok',
+      svg: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDUwMCA1MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIiByeD0iMTAwIiBmaWxsPSIjMDAwMDAwIi8+CjxwYXRoIGQ9Ik0zMDAgMTAwVjI1MEMzMDAgMjgwIDMyMCAzMDAgMzUwIDMwMFYzNTBDMjkwIDM1MCAyNTAgMzEwIDI1MCAyNTBWMTUwQzI1MCAxMjAgMjMwIDEwMCAyMDAgMTAwVjE1MEMyMDAgMTgwIDE4MCAyMDAgMTUwIDIwMFYyNTBDMjEwIDI1MCAyNTAgMjkwIDI1MCAzNTBWNDAwSDMwMFYyNTBDMzAwIDIyMCAzMjAgMjAwIDM1MCAyMDBWMTUwQzI5MCAxNTAgMjUwIDExMCAyNTAgNTBIMzAwVjEwMFoiIGZpbGw9IiNGRjAwNDQiLz4KPHBhdGggZD0iTTMwMCAxMDBWMjUwQzMwMCAyODAgMzIwIDMwMCAzNTAgMzAwVjM1MEMyOTAgMzUwIDI1MCAzMTAgMjUwIDI1MFYxNTBDMjUwIDEyMCAyMzAgMTAwIDIwMCAxMDBWMTUwQzIwMCAxODAgMTgwIDIwMCAxNTAgMjAwVjI1MEMyMTAgMjUwIDI1MCAyOTAgMjUwIDM1MFY0MDBIMzAwVjI1MEMzMDAgMjIwIDMyMCAyMDAgMzUwIDIwMFYxNTBDMjkwIDE1MCAyNTAgMTEwIDI1MCA1MEgzMDBWMTAwWiIgZmlsbD0iIzAwRjJFQSIvPgo8L3N2Zz4='
+    },
+    {
+      id: 'linkedin',
+      name: 'LinkedIn',
+      svg: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDUwMCA1MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIiByeD0iMTAwIiBmaWxsPSIjMDA3N0I1Ii8+CjxyZWN0IHg9IjEwMCIgeT0iMTgwIiB3aWR0aD0iNjAiIGhlaWdodD0iMTgwIiBmaWxsPSJ3aGl0ZSIvPgo8Y2lyY2xlIGN4PSIxMzAiIGN5PSIxMzAiIHI9IjMwIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMjIwIDE4MFYzNjBIMjgwVjI3MEMyODAgMjQwIDMwMCAyMjAgMzMwIDIyMEMzNjAgMjIwIDM4MCAyNDAgMzgwIDI3MFYzNjBINDQwVjI3MEM0NDAgMjEwIDQwMCAxNzAgMzQwIDE3MEMyOTAgMTcwIDI1MCAxOTAgMjIwIDIyMFYxODBIMjIwWiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+'
+    },
+    {
+      id: 'gmail',
+      name: 'Gmail',
+      svg: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDUwMCA1MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIiByeD0iMTAwIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTAwIDE1MEw1MCAxODBWMzUwQzUwIDM3MCA2MCAzODAgODAgMzgwSDEwMFYyMDBMMTAwIDE1MFoiIGZpbGw9IiM0Mjg1RjQiLz4KPHBhdGggZD0iTTQwMCAxNTBMNDUwIDE4MFYzNTBDNDUwIDM3MCA0NDAgMzgwIDQyMCAzODBINDAwVjIwMEw0MDAgMTUwWiIgZmlsbD0iIzM0QTg1MyIvPgo8cGF0aCBkPSJNMTAwIDE1MEwyNTAgMjYwTDQwMCAxNTBWMTMwQzQwMCAxMTAgMzkwIDEwMCAzNzAgMTAwSDEzMEMxMTAgMTAwIDEwMCAxMTAgMTAwIDEzMFYxNTBaIiBmaWxsPSIjRUE0MzM1Ii8+CjxwYXRoIGQ9Ik0xMDAgMjAwVjM4MEg0MDBWMjAwTDI1MCAzMTBMMTAwIDIwMFoiIGZpbGw9IiNGQkJDMDQiLz4KPC9zdmc+'
+    },
+    {
+      id: 'spotify',
+      name: 'Spotify',
+      svg: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDUwMCA1MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIiByeD0iMTAwIiBmaWxsPSIjMUVENzYwIi8+CjxwYXRoIGQ9Ik0xNTAgMjAwQzE1MCAyMDAgMjUwIDE1MCAzNTAgMjAwTTEzMCAyNTBDMTMwIDI1MCAyMzAgMjAwIDMzMCAyNTBNMTEwIDMwMEMxMTAgMzAwIDIxMCAyNTAgMzEwIDMwMCIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIzMCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+Cjwvc3ZnPg=='
+    },
+    {
+      id: 'github',
+      name: 'GitHub',
+      svg: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDUwMCA1MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIiByeD0iMTAwIiBmaWxsPSIjMTgxNzE3Ii8+CjxwYXRoIGQ9Ik0yNTAgMTAwQzE3MiAxMDAgMTEwIDE2MiAxMTAgMjQwQzExMCAzMDAgMTUwIDM1MCAyMDAgMzcwQzIwOCAzNzIgMjEwIDM2NiAyMTAgMzYwVjMzMEMyMTAgMzIwIDE5NSAzMTAgMTkwIDMwMEMxNDAgMjkwIDEzMCAyNjAgMTMwIDI0MEMxMzAgMjIwIDE0MCAyMDAgMTYwIDE5MEMxNTUgMTgwIDE1NSAxNjAgMTYwIDE1MEMxNzAgMTQwIDE4NSAxMzUgMjAwIDEzNUMyMTUgMTM1IDIzMCAxNDAgMjQwIDE1MEMyNTAgMTQwIDI2NSAxMzUgMjgwIDEzNUMyOTUgMTM1IDMxMCAxNDAgMzIwIDE1MEMzMjUgMTYwIDMyNSAxODAgMzIwIDE5MEMzNDAgMjAwIDM1MCAyMjAgMzUwIDI0MEMzNTAgMjYwIDM0MCAyOTAgMjkwIDMwMEMyODUgMzEwIDI3MCAzMjAgMjcwIDMzMFYzNjBDMjcwIDM2NiAyNzIgMzcyIDI4MCAzNzBDMzMwIDM1MCAzNzAgMzAwIDM3MCAyNDBDMzcwIDE2MiAzMDggMTAwIDI1MCAxMDBaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4='
+    },
+    {
+      id: 'telegram',
+      name: 'Telegram',
+      svg: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDUwMCA1MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIiByeD0iMTAwIiBmaWxsPSIjMjY5NkQyIi8+CjxwYXRoIGQ9Ik0xMDAgMjUwTDM1MCAxMDBMNDAwIDE1MEwxNTAgNDAwTDEwMCAzNTBMMTAwIDI1MFpNMTUwIDQwMEwyMDAgMzUwTDE1MCAzMDBMMTUwIDQwMFoiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPg=='
+    },
+    {
+      id: 'discord',
+      name: 'Discord',
+      svg: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDUwMCA1MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIiByeD0iMTAwIiBmaWxsPSIjNTg2NUYyIi8+CjxwYXRoIGQ9Ik0xNTAgMTUwQzE1MCAxNTAgMjAwIDEyMCAyNTAgMTIwQzMwMCAxMjAgMzUwIDE1MCAzNTAgMTUwQzM1MCAxNTAgMzgwIDE4MCAzODAgMjUwQzM4MCAzMjAgMzUwIDM1MCAzNTAgMzUwQzM1MCAzNTAgMzAwIDM4MCAyNTAgMzgwQzIwMCAzODAgMTUwIDM1MCAxNTAgMzUwQzE1MCAzNTAgMTIwIDMyMCAxMjAgMjUwQzEyMCAxODAgMTUwIDE1MCAxNTAgMTUwWk0yMDAgMjIwQzIwMCAyMzAgMTkwIDI0MCAxODAgMjQwQzE3MCAyNDAgMTYwIDIzMCAxNjAgMjIwQzE2MCAyMTAgMTcwIDIwMCAxODAgMjAwQzE5MCAyMDAgMjAwIDIxMCAyMDAgMjIwWk0zNDAgMjIwQzM0MCAyMzAgMzMwIDI0MCAzMjAgMjQwQzMxMCAyNDAgMzAwIDIzMCAzMDAgMjIwQzMwMCAyMTAgMzEwIDIwMCAzMjAgMjAwQzMzMCAyMDAgMzQwIDIxMCAzNDAgMjIwWiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+'
+    }
+  ];
 
   // Apply theme class to body
   useEffect(() => {
@@ -850,32 +915,121 @@ function App() {
 
               <div className="form-group">
                 <label className="label">{t.addLogo}</label>
-                {!logoImage ? (
-                  <label className="upload-btn">
-                    <input 
-                      type="file" 
-                      accept="image/*" 
-                      onChange={handleLogoUpload}
-                      style={{display: 'none'}}
-                    />
+                
+                {/* Tab selector */}
+                <div className="format-toggle-gen" style={{marginBottom: '1rem'}}>
+                  <button
+                    onClick={() => setLogoTab('preset')}
+                    className={`format-btn-gen ${logoTab === 'preset' ? 'active' : ''}`}
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                      <rect x="3" y="3" width="8" height="8" rx="1"/>
+                      <rect x="13" y="3" width="8" height="8" rx="1"/>
+                      <rect x="3" y="13" width="8" height="8" rx="1"/>
+                      <rect x="13" y="13" width="8" height="8" rx="1"/>
+                    </svg>
+                    {t.presetIcons}
+                  </button>
+                  <button
+                    onClick={() => setLogoTab('custom')}
+                    className={`format-btn-gen ${logoTab === 'custom' ? 'active' : ''}`}
+                  >
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
                       <polyline points="17 8 12 3 7 8"/>
                       <line x1="12" y1="3" x2="12" y2="15"/>
                     </svg>
-                    <span>{t.uploadLogo}</span>
-                  </label>
+                    {t.customUpload}
+                  </button>
+                </div>
+
+                {logoTab === 'preset' ? (
+                  // Preset icons grid
+                  !logoImage ? (
+                    <div className="preset-icons-grid" style={{
+                      display: 'grid',
+                      gridTemplateColumns: 'repeat(auto-fill, minmax(80px, 1fr))',
+                      gap: '0.75rem',
+                      maxHeight: '300px',
+                      overflowY: 'auto',
+                      padding: '0.5rem',
+                      background: 'rgba(255, 255, 255, 0.02)',
+                      borderRadius: '12px',
+                      border: '1px solid rgba(255, 255, 255, 0.08)'
+                    }}>
+                      {presetIcons.map((icon) => (
+                        <button
+                          key={icon.id}
+                          onClick={() => setLogoImage(icon.svg)}
+                          style={{
+                            padding: '0.75rem',
+                            background: 'rgba(255, 255, 255, 0.03)',
+                            border: '2px solid rgba(255, 255, 255, 0.08)',
+                            borderRadius: '10px',
+                            cursor: 'pointer',
+                            transition: 'all 0.3s',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            gap: '0.5rem'
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+                            e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+                            e.currentTarget.style.transform = 'scale(1.05)';
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.background = 'rgba(255, 255, 255, 0.03)';
+                            e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)';
+                            e.currentTarget.style.transform = 'scale(1)';
+                          }}
+                        >
+                          <img src={icon.svg} alt={icon.name} style={{width: '48px', height: '48px', borderRadius: '8px'}} />
+                          <span style={{fontSize: '0.75rem', color: '#9CA3AF', textAlign: 'center'}}>{icon.name}</span>
+                        </button>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="logo-preview">
+                      <img src={logoImage} alt="Logo" style={{maxWidth: '100px', maxHeight: '100px', borderRadius: '8px'}} />
+                      <button onClick={removeLogo} className="btn-remove-logo">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <line x1="18" y1="6" x2="6" y2="18"/>
+                          <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        {t.removeLogo}
+                      </button>
+                    </div>
+                  )
                 ) : (
-                  <div className="logo-preview">
-                    <img src={logoImage} alt="Logo" style={{maxWidth: '100px', maxHeight: '100px', borderRadius: '8px'}} />
-                    <button onClick={removeLogo} className="btn-remove-logo">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <line x1="18" y1="6" x2="6" y2="18"/>
-                        <line x1="6" y1="6" x2="18" y2="18"/>
+                  // Custom upload
+                  !logoImage ? (
+                    <label className="upload-btn">
+                      <input 
+                        type="file" 
+                        accept="image/*" 
+                        onChange={handleLogoUpload}
+                        style={{display: 'none'}}
+                      />
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                        <polyline points="17 8 12 3 7 8"/>
+                        <line x1="12" y1="3" x2="12" y2="15"/>
                       </svg>
-                      {t.removeLogo}
-                    </button>
-                  </div>
+                      <span>{t.uploadLogo}</span>
+                    </label>
+                  ) : (
+                    <div className="logo-preview">
+                      <img src={logoImage} alt="Logo" style={{maxWidth: '100px', maxHeight: '100px', borderRadius: '8px'}} />
+                      <button onClick={removeLogo} className="btn-remove-logo">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <line x1="18" y1="6" x2="6" y2="18"/>
+                          <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        {t.removeLogo}
+                      </button>
+                    </div>
+                  )
                 )}
               </div>
 
