@@ -63,12 +63,6 @@ export const translations = {
     rounded: "Rounded",
     roundedBlack: "Rounded Black",
     handwritten: "Handwritten",
-    shoppingBag: "Shopping Bag",
-    giftBox: "Gift Box",
-    envelope: "Envelope",
-    delivery: "Delivery",
-    handPhone: "Hand Phone",
-    smartphone: "Smartphone",
     scanMe: "Scan me!",
     
     // Types
@@ -206,12 +200,6 @@ export const translations = {
     rounded: "Bulat",
     roundedBlack: "Bulat Hitam",
     handwritten: "Tulisan Tangan",
-    shoppingBag: "Tas Belanja",
-    giftBox: "Kotak Hadiah",
-    envelope: "Amplop",
-    delivery: "Pengiriman",
-    handPhone: "Tangan & HP",
-    smartphone: "Smartphone",
     scanMe: "Scan me!",
     
     // Types
