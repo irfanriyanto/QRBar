@@ -4,6 +4,7 @@ import Barcode from 'react-barcode';
 import html2canvas from 'html2canvas';
 import { translations, languages } from './translations';
 import { ThemeLanguageControls } from './ThemeLanguageControls';
+import CustomQRCode from './CustomQRCode';
 import './App.css';
 
 function App() {
@@ -193,19 +194,76 @@ function App() {
   };
 
   const downloadCode = async () => {
-    if (downloadRef.current) {
-      const canvas = await html2canvas(downloadRef.current, {
-        backgroundColor: '#ffffff',
-        scale: 5,
-        useCORS: true,
-        allowTaint: true,
-        logging: false
+    if (codeFormat === 'qr') {
+      // For custom QR, use qr-code-styling download
+      const QRCodeStyling = (await import('qr-code-styling')).default;
+      
+      const dotsOptions = {
+        squares: 'square',
+        dots: 'dots',
+        rounded: 'rounded'
+      };
+
+      const cornerSquareOptions = {
+        square: 'square',
+        rounded: 'extra-rounded',
+        extraRounded: 'extra-rounded'
+      };
+
+      const cornerDotOptions = {
+        square: 'square',
+        rounded: 'dot',
+        extraRounded: 'dot'
+      };
+
+      const qrCode = new QRCodeStyling({
+        width: 1024,
+        height: 1024,
+        data: generateData(),
+        margin: 20,
+        qrOptions: {
+          typeNumber: 0,
+          mode: 'Byte',
+          errorCorrectionLevel: 'H'
+        },
+        dotsOptions: {
+          type: dotsOptions[qrStyle] || 'square',
+          color: qrColor
+        },
+        backgroundOptions: {
+          color: qrBgColor
+        },
+        cornersSquareOptions: {
+          type: cornerSquareOptions[cornerStyle] || 'square',
+          color: qrColor
+        },
+        cornersDotOptions: {
+          type: cornerDotOptions[cornerStyle] || 'square',
+          color: qrColor
+        }
       });
-      const link = document.createElement('a');
+
       const timestamp = new Date().toISOString().slice(0,10);
-      link.download = `qrbar-${selectedType}-${timestamp}.png`;
-      link.href = canvas.toDataURL('image/png', 1.0);
-      link.click();
+      qrCode.download({
+        name: `qrbar-${selectedType}-${timestamp}`,
+        extension: 'png'
+      });
+    } else {
+      // For barcode, use html2canvas
+      if (downloadRef.current) {
+        const canvas = await html2canvas(downloadRef.current, {
+          backgroundColor: '#ffffff',
+          scale: 5,
+          useCORS: true,
+          allowTaint: true,
+          logging: false
+        });
+        const link = document.createElement('a');
+        const timestamp = new Date().toISOString().slice(0,10);
+        link.download = `qrbar-${selectedType}-${timestamp}.png`;
+        link.href = canvas.toDataURL('image/png', 1.0);
+        link.click();
+      }
     }
   };
 
@@ -723,16 +781,13 @@ function App() {
                     </div>
                     <div className="phone-content">
                       {codeFormat === 'qr' ? (
-                        <QRCodeCanvas 
+                        <CustomQRCode 
                           value={generateData()} 
-                          size={240} 
-                          level="H" 
-                          includeMargin={true}
-                          fgColor={qrColor}
+                          size={240}
+                          qrColor={qrColor}
                           bgColor={qrBgColor}
-                          imageSettings={qrStyle === 'dots' ? {
-                            excavate: true,
-                          } : undefined}
+                          qrStyle={qrStyle}
+                          cornerStyle={cornerStyle}
                         />
                       ) : (
                         <div className="barcode-container">
@@ -747,17 +802,8 @@ function App() {
           </div>
 
           <div style={{ position: 'absolute', left: '-9999px' }}>
-            <div ref={downloadRef} style={{ background: qrBgColor, padding: '40px', display: 'inline-block' }}>
-              {codeFormat === 'qr' ? (
-                <QRCodeCanvas 
-                  value={generateData()} 
-                  size={512} 
-                  level="H" 
-                  includeMargin={true}
-                  fgColor={qrColor}
-                  bgColor={qrBgColor}
-                />
-              ) : (
+            <div ref={downloadRef} style={{ background: 'white', padding: '40px', display: 'inline-block' }}>
+              {codeFormat === 'barcode' && (
                 <Barcode value={generateData()} format={barcodeFormat} width={3} height={150} displayValue={true} fontSize={20} />
               )}
             </div>
