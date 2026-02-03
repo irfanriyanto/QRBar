@@ -64,67 +64,67 @@ function App() {
   const downloadRef = useRef(null);
   const t = translations[language];
 
-  // Preset icons - using proper icon URLs from reliable CDN
+  // Preset icons - using colored icons from reliable CDN
   const presetIcons = [
     {
       id: 'instagram',
       name: 'Instagram',
-      svg: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/instagram.svg'
+      svg: 'https://cdn.simpleicons.org/instagram/E4405F'
     },
     {
       id: 'facebook',
       name: 'Facebook',
-      svg: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/facebook.svg'
+      svg: 'https://cdn.simpleicons.org/facebook/1877F2'
     },
     {
       id: 'twitter',
       name: 'Twitter/X',
-      svg: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/x.svg'
+      svg: 'https://cdn.simpleicons.org/x/000000'
     },
     {
       id: 'youtube',
       name: 'YouTube',
-      svg: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/youtube.svg'
+      svg: 'https://cdn.simpleicons.org/youtube/FF0000'
     },
     {
       id: 'whatsapp',
       name: 'WhatsApp',
-      svg: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/whatsapp.svg'
+      svg: 'https://cdn.simpleicons.org/whatsapp/25D366'
     },
     {
       id: 'tiktok',
       name: 'TikTok',
-      svg: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/tiktok.svg'
+      svg: 'https://cdn.simpleicons.org/tiktok/000000'
     },
     {
       id: 'linkedin',
       name: 'LinkedIn',
-      svg: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/linkedin.svg'
+      svg: 'https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png'
     },
     {
       id: 'gmail',
       name: 'Gmail',
-      svg: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/gmail.svg'
+      svg: 'https://cdn.simpleicons.org/gmail/EA4335'
     },
     {
       id: 'spotify',
       name: 'Spotify',
-      svg: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/spotify.svg'
+      svg: 'https://cdn.simpleicons.org/spotify/1DB954'
     },
     {
       id: 'github',
       name: 'GitHub',
-      svg: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/github.svg'
+      svg: 'https://cdn.simpleicons.org/github/181717'
     },
     {
       id: 'telegram',
       name: 'Telegram',
-      svg: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/telegram.svg'
+      svg: 'https://cdn.simpleicons.org/telegram/26A5E4'
     },
     {
       id: 'discord',
       name: 'Discord',
-      svg: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/discord.svg'
+      svg: 'https://cdn.simpleicons.org/discord/5865F2'
     }
   ];
 
