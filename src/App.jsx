@@ -62,67 +62,67 @@ function App() {
   const downloadRef = useRef(null);
   const t = translations[language];
 
-  // Preset icons - using proper icon URLs from CDN
+  // Preset icons - using proper icon URLs from reliable CDN
   const presetIcons = [
     {
       id: 'instagram',
       name: 'Instagram',
-      svg: 'https://cdn.simpleicons.org/instagram/E4405F'
+      svg: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/instagram.svg'
     },
     {
       id: 'facebook',
       name: 'Facebook',
-      svg: 'https://cdn.simpleicons.org/facebook/1877F2'
+      svg: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/facebook.svg'
     },
     {
       id: 'twitter',
       name: 'Twitter/X',
-      svg: 'https://cdn.simpleicons.org/x/000000'
+      svg: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/x.svg'
     },
     {
       id: 'youtube',
       name: 'YouTube',
-      svg: 'https://cdn.simpleicons.org/youtube/FF0000'
+      svg: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/youtube.svg'
     },
     {
       id: 'whatsapp',
       name: 'WhatsApp',
-      svg: 'https://cdn.simpleicons.org/whatsapp/25D366'
+      svg: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/whatsapp.svg'
     },
     {
       id: 'tiktok',
       name: 'TikTok',
-      svg: 'https://cdn.simpleicons.org/tiktok/000000'
+      svg: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/tiktok.svg'
     },
     {
       id: 'linkedin',
       name: 'LinkedIn',
-      svg: 'https://cdn.simpleicons.org/linkedin/0A66C2'
+      svg: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/linkedin.svg'
     },
     {
       id: 'gmail',
       name: 'Gmail',
-      svg: 'https://cdn.simpleicons.org/gmail/EA4335'
+      svg: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/gmail.svg'
     },
     {
       id: 'spotify',
       name: 'Spotify',
-      svg: 'https://cdn.simpleicons.org/spotify/1DB954'
+      svg: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/spotify.svg'
     },
     {
       id: 'github',
       name: 'GitHub',
-      svg: 'https://cdn.simpleicons.org/github/181717'
+      svg: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/github.svg'
     },
     {
       id: 'telegram',
       name: 'Telegram',
-      svg: 'https://cdn.simpleicons.org/telegram/26A5E4'
+      svg: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/telegram.svg'
     },
     {
       id: 'discord',
       name: 'Discord',
-      svg: 'https://cdn.simpleicons.org/discord/5865F2'
+      svg: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/discord.svg'
     }
   ];
 
@@ -413,6 +413,24 @@ function App() {
 
   const removeLogo = () => {
     setLogoImage(null);
+  };
+
+  const getIconBackground = (iconId) => {
+    const backgrounds = {
+      instagram: 'linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)',
+      facebook: '#1877F2',
+      twitter: '#000000',
+      youtube: '#FF0000',
+      whatsapp: '#25D366',
+      tiktok: '#000000',
+      linkedin: '#0A66C2',
+      gmail: '#EA4335',
+      spotify: '#1DB954',
+      github: '#181717',
+      telegram: '#26A5E4',
+      discord: '#5865F2'
+    };
+    return backgrounds[iconId] || '#6B7280';
   };
 
   if (!showGenerator) {
@@ -984,7 +1002,25 @@ function App() {
                             e.currentTarget.style.transform = 'scale(1)';
                           }}
                         >
-                          <img src={icon.svg} alt={icon.name} style={{width: '48px', height: '48px', borderRadius: '8px'}} />
+                          <div style={{
+                            width: '48px', 
+                            height: '48px', 
+                            borderRadius: '8px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            background: getIconBackground(icon.id)
+                          }}>
+                            <img 
+                              src={icon.svg} 
+                              alt={icon.name} 
+                              style={{
+                                width: '32px', 
+                                height: '32px',
+                                filter: 'brightness(0) invert(1)'
+                              }} 
+                            />
+                          </div>
                           <span style={{fontSize: '0.75rem', color: '#9CA3AF', textAlign: 'center'}}>{icon.name}</span>
                         </button>
                       ))}
