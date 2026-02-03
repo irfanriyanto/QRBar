@@ -65,8 +65,12 @@ const CustomQRCode = ({
       dotsColor = undefined;
     }
 
-    if (!qrCode.current && ref.current) {
-      qrCode.current = new QRCodeStyling({
+    if (ref.current) {
+      // Clear existing content
+      ref.current.innerHTML = '';
+      
+      // Create new QR code instance
+      const newQrCode = new QRCodeStyling({
         width: size,
         height: size,
         data: value,
@@ -101,85 +105,10 @@ const CustomQRCode = ({
         image: logoImage || undefined
       });
       
-      // Clear any existing content first
-      ref.current.innerHTML = '';
-      qrCode.current.append(ref.current);
+      qrCode.current = newQrCode;
+      newQrCode.append(ref.current);
     }
-  }, [ref.current]);
-
-  useEffect(() => {
-    if (qrCode.current) {
-      const dotsOptions = {
-        squares: 'square',
-        dots: 'dots',
-        rounded: 'rounded'
-      };
-
-      const cornerSquareOptions = {
-        square: 'square',
-        rounded: 'extra-rounded',
-        extraRounded: 'extra-rounded'
-      };
-
-      const cornerDotOptions = {
-        square: 'square',
-        rounded: 'dot',
-        extraRounded: 'dot'
-      };
-
-      // Prepare dots color based on gradient type
-      let dotsColor = qrColor;
-      let dotsGradient = null;
-
-      if (gradientType === 'linear') {
-        dotsGradient = {
-          type: 'linear',
-          rotation: 0,
-          colorStops: [
-            { offset: 0, color: gradientColor1 },
-            { offset: 1, color: gradientColor2 }
-          ]
-        };
-        dotsColor = undefined;
-      } else if (gradientType === 'radial') {
-        dotsGradient = {
-          type: 'radial',
-          colorStops: [
-            { offset: 0, color: gradientColor1 },
-            { offset: 1, color: gradientColor2 }
-          ]
-        };
-        dotsColor = undefined;
-      }
-
-      qrCode.current.update({
-        data: value,
-        dotsOptions: {
-          type: dotsOptions[qrStyle] || 'square',
-          color: dotsColor,
-          gradient: dotsGradient
-        },
-        backgroundOptions: {
-          color: bgColor
-        },
-        cornersSquareOptions: {
-          type: cornerSquareOptions[cornerStyle] || 'square',
-          color: gradientType === 'solid' ? qrColor : gradientColor1
-        },
-        cornersDotOptions: {
-          type: cornerDotOptions[cornerStyle] || 'square',
-          color: gradientType === 'solid' ? qrColor : gradientColor1
-        },
-        image: logoImage || undefined,
-        imageOptions: {
-          hideBackgroundDots: true,
-          imageSize: logoImage ? logoSize : 0,
-          margin: 5,
-          crossOrigin: 'anonymous'
-        }
-      });
-    }
-  }, [value, qrColor, bgColor, qrStyle, cornerStyle, logoImage, logoSize, gradientType, gradientColor1, gradientColor2]);
+  }, [value, size, qrColor, bgColor, qrStyle, cornerStyle, logoImage, logoSize, gradientType, gradientColor1, gradientColor2, frameStyle]);
 
   const FrameComponent = QRFrames[frameStyle] || QRFrames.none;
 
