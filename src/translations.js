@@ -26,6 +26,19 @@ export const translations = {
     qrCode: "QR Code",
     barcode: "Barcode",
     barcodeFormat: "Barcode Format",
+    customizeDesign: "Customize Design",
+    
+    // QR Customization
+    qrColor: "QR Color",
+    backgroundColor: "Background Color",
+    patternStyle: "Pattern Style",
+    cornerStyle: "Corner Style",
+    standard: "Standard",
+    rounded: "Rounded",
+    dots: "Dots",
+    square: "Square",
+    circle: "Circle",
+    extraRounded: "Extra Rounded",
     
     // Types
     plainText: "Plain Text",
@@ -125,6 +138,19 @@ export const translations = {
     qrCode: "Kode QR",
     barcode: "Barcode",
     barcodeFormat: "Format Barcode",
+    customizeDesign: "Kustomisasi Desain",
+    
+    // QR Customization
+    qrColor: "Warna QR",
+    backgroundColor: "Warna Background",
+    patternStyle: "Style Pattern",
+    cornerStyle: "Style Sudut",
+    standard: "Standar",
+    rounded: "Bulat",
+    dots: "Titik",
+    square: "Kotak",
+    circle: "Lingkaran",
+    extraRounded: "Sangat Bulat",
     
     // Types
     plainText: "Teks Biasa",

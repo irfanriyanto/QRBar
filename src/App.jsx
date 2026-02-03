@@ -45,6 +45,12 @@ function App() {
   const [paymentNote, setPaymentNote] = useState('');
   const [barcodeFormat, setBarcodeFormat] = useState('CODE128');
   
+  // QR Customization
+  const [qrColor, setQrColor] = useState('#000000');
+  const [qrBgColor, setQrBgColor] = useState('#FFFFFF');
+  const [qrStyle, setQrStyle] = useState('squares'); // squares, dots, rounded
+  const [cornerStyle, setCornerStyle] = useState('square'); // square, rounded, extraRounded
+  
   const downloadRef = useRef(null);
   const t = translations[language];
 
@@ -554,7 +560,130 @@ function App() {
                 </select>
               </div>
             )}
+          </div>
 
+          {codeFormat === 'qr' && (
+            <div className="form-card">
+              <h3 className="section-title">{t.customizeDesign}</h3>
+              
+              <div className="form-group">
+                <label className="label">{t.qrColor}</label>
+                <div style={{display: 'flex', gap: '1rem', alignItems: 'center'}}>
+                  <input 
+                    type="color" 
+                    value={qrColor} 
+                    onChange={(e) => setQrColor(e.target.value)} 
+                    style={{width: '60px', height: '40px', border: 'none', borderRadius: '8px', cursor: 'pointer'}}
+                  />
+                  <input 
+                    type="text" 
+                    value={qrColor} 
+                    onChange={(e) => setQrColor(e.target.value)} 
+                    className="input" 
+                    placeholder="#000000"
+                    style={{flex: 1}}
+                  />
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label className="label">{t.backgroundColor}</label>
+                <div style={{display: 'flex', gap: '1rem', alignItems: 'center'}}>
+                  <input 
+                    type="color" 
+                    value={qrBgColor} 
+                    onChange={(e) => setQrBgColor(e.target.value)} 
+                    style={{width: '60px', height: '40px', border: 'none', borderRadius: '8px', cursor: 'pointer'}}
+                  />
+                  <input 
+                    type="text" 
+                    value={qrBgColor} 
+                    onChange={(e) => setQrBgColor(e.target.value)} 
+                    className="input" 
+                    placeholder="#FFFFFF"
+                    style={{flex: 1}}
+                  />
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label className="label">{t.patternStyle}</label>
+                <div className="style-options">
+                  <button 
+                    onClick={() => setQrStyle('squares')} 
+                    className={`style-btn ${qrStyle === 'squares' ? 'active' : ''}`}
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                      <rect x="4" y="4" width="6" height="6"/>
+                      <rect x="14" y="4" width="6" height="6"/>
+                      <rect x="4" y="14" width="6" height="6"/>
+                      <rect x="14" y="14" width="6" height="6"/>
+                    </svg>
+                    <span>{t.square}</span>
+                  </button>
+                  <button 
+                    onClick={() => setQrStyle('dots')} 
+                    className={`style-btn ${qrStyle === 'dots' ? 'active' : ''}`}
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                      <circle cx="7" cy="7" r="3"/>
+                      <circle cx="17" cy="7" r="3"/>
+                      <circle cx="7" cy="17" r="3"/>
+                      <circle cx="17" cy="17" r="3"/>
+                    </svg>
+                    <span>{t.dots}</span>
+                  </button>
+                  <button 
+                    onClick={() => setQrStyle('rounded')} 
+                    className={`style-btn ${qrStyle === 'rounded' ? 'active' : ''}`}
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                      <rect x="4" y="4" width="6" height="6" rx="1.5"/>
+                      <rect x="14" y="4" width="6" height="6" rx="1.5"/>
+                      <rect x="4" y="14" width="6" height="6" rx="1.5"/>
+                      <rect x="14" y="14" width="6" height="6" rx="1.5"/>
+                    </svg>
+                    <span>{t.rounded}</span>
+                  </button>
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label className="label">{t.cornerStyle}</label>
+                <div className="style-options">
+                  <button 
+                    onClick={() => setCornerStyle('square')} 
+                    className={`style-btn ${cornerStyle === 'square' ? 'active' : ''}`}
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <rect x="4" y="4" width="7" height="7"/>
+                    </svg>
+                    <span>{t.square}</span>
+                  </button>
+                  <button 
+                    onClick={() => setCornerStyle('rounded')} 
+                    className={`style-btn ${cornerStyle === 'rounded' ? 'active' : ''}`}
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <rect x="4" y="4" width="7" height="7" rx="1.5"/>
+                    </svg>
+                    <span>{t.rounded}</span>
+                  </button>
+                  <button 
+                    onClick={() => setCornerStyle('extraRounded')} 
+                    className={`style-btn ${cornerStyle === 'extraRounded' ? 'active' : ''}`}
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <rect x="4" y="4" width="7" height="7" rx="3"/>
+                    </svg>
+                    <span>{t.extraRounded}</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          <div className="form-card">
             <div className="button-group-gen">
               <button onClick={downloadCode} className="btn-primary-gen">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -594,7 +723,17 @@ function App() {
                     </div>
                     <div className="phone-content">
                       {codeFormat === 'qr' ? (
-                        <QRCodeCanvas value={generateData()} size={240} level="H" includeMargin={true} />
+                        <QRCodeCanvas 
+                          value={generateData()} 
+                          size={240} 
+                          level="H" 
+                          includeMargin={true}
+                          fgColor={qrColor}
+                          bgColor={qrBgColor}
+                          imageSettings={qrStyle === 'dots' ? {
+                            excavate: true,
+                          } : undefined}
+                        />
                       ) : (
                         <div className="barcode-container">
                           <Barcode value={generateData()} format={barcodeFormat} width={1.5} height={80} displayValue={true} fontSize={14} />
@@ -608,9 +747,16 @@ function App() {
           </div>
 
           <div style={{ position: 'absolute', left: '-9999px' }}>
-            <div ref={downloadRef} style={{ background: 'white', padding: '40px', display: 'inline-block' }}>
+            <div ref={downloadRef} style={{ background: qrBgColor, padding: '40px', display: 'inline-block' }}>
               {codeFormat === 'qr' ? (
-                <QRCodeCanvas value={generateData()} size={512} level="H" includeMargin={true} />
+                <QRCodeCanvas 
+                  value={generateData()} 
+                  size={512} 
+                  level="H" 
+                  includeMargin={true}
+                  fgColor={qrColor}
+                  bgColor={qrBgColor}
+                />
               ) : (
                 <Barcode value={generateData()} format={barcodeFormat} width={3} height={150} displayValue={true} fontSize={20} />
               )}

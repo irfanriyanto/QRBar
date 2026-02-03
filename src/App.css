@@ -643,6 +643,46 @@ textarea.input {
   margin-top: 2rem;
 }
 
+.style-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 0.75rem;
+}
+
+.style-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 2px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  color: #9CA3AF;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.style-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #E5E7EB;
+}
+
+.style-btn.active {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.style-btn svg {
+  width: 24px;
+  height: 24px;
+}
+
 .btn-primary-gen,
 .btn-secondary-gen {
   flex: 1;
@@ -1286,6 +1326,25 @@ body.light-mode .btn-secondary-gen:hover,
 body.light-mode .btn-back:hover {
   background: #F3F4F6;
   border-color: #D1D5DB;
+}
+
+body.light-mode .style-btn {
+  background: #F9FAFB;
+  border: 2px solid #E5E7EB;
+  color: #6B7280;
+}
+
+body.light-mode .style-btn:hover {
+  background: #F3F4F6;
+  border-color: #D1D5DB;
+  color: #374151;
+}
+
+body.light-mode .style-btn.active {
+  background: #374151;
+  border-color: #374151;
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(55, 65, 81, 0.2);
 }
 
 body.light-mode .format-btn-gen {
