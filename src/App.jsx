@@ -51,6 +51,12 @@ function App() {
   const [qrBgColor, setQrBgColor] = useState('#FFFFFF');
   const [qrStyle, setQrStyle] = useState('squares'); // squares, dots, rounded
   const [cornerStyle, setCornerStyle] = useState('square'); // square, rounded, extraRounded
+  const [logoImage, setLogoImage] = useState(null);
+  const [logoSize, setLogoSize] = useState(0.3); // 0.2, 0.3, 0.4
+  const [gradientType, setGradientType] = useState('solid'); // solid, linear, radial
+  const [gradientColor1, setGradientColor1] = useState('#000000');
+  const [gradientColor2, setGradientColor2] = useState('#4B5563');
+  const [frameStyle, setFrameStyle] = useState('none'); // none, banner, box, circular
   
   const downloadRef = useRef(null);
   const t = translations[language];
@@ -216,6 +222,31 @@ function App() {
         extraRounded: 'dot'
       };
 
+      // Prepare dots color based on gradient type
+      let dotsColor = qrColor;
+      let dotsGradient = null;
+
+      if (gradientType === 'linear') {
+        dotsGradient = {
+          type: 'linear',
+          rotation: 0,
+          colorStops: [
+            { offset: 0, color: gradientColor1 },
+            { offset: 1, color: gradientColor2 }
+          ]
+        };
+        dotsColor = undefined;
+      } else if (gradientType === 'radial') {
+        dotsGradient = {
+          type: 'radial',
+          colorStops: [
+            { offset: 0, color: gradientColor1 },
+            { offset: 1, color: gradientColor2 }
+          ]
+        };
+        dotsColor = undefined;
+      }
+
       const qrCode = new QRCodeStyling({
         width: 1024,
         height: 1024,
@@ -226,21 +257,29 @@ function App() {
           mode: 'Byte',
           errorCorrectionLevel: 'H'
         },
+        imageOptions: {
+          hideBackgroundDots: true,
+          imageSize: logoImage ? logoSize : 0,
+          margin: 10,
+          crossOrigin: 'anonymous'
+        },
         dotsOptions: {
           type: dotsOptions[qrStyle] || 'square',
-          color: qrColor
+          color: dotsColor,
+          gradient: dotsGradient
         },
         backgroundOptions: {
           color: qrBgColor
         },
         cornersSquareOptions: {
           type: cornerSquareOptions[cornerStyle] || 'square',
-          color: qrColor
+          color: gradientType === 'solid' ? qrColor : gradientColor1
         },
         cornersDotOptions: {
           type: cornerDotOptions[cornerStyle] || 'square',
-          color: qrColor
-        }
+          color: gradientType === 'solid' ? qrColor : gradientColor1
+        },
+        image: logoImage || undefined
       });
 
       const timestamp = new Date().toISOString().slice(0,10);
@@ -294,6 +333,21 @@ function App() {
     setUpiId('');
     setPaymentAmount('');
     setPaymentNote('');
+  };
+
+  const handleLogoUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        setLogoImage(event.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const removeLogo = () => {
+    setLogoImage(null);
   };
 
   if (!showGenerator) {
@@ -707,6 +761,151 @@ function App() {
               </div>
 
               <div className="form-group">
+                <label className="label">{t.gradient}</label>
+                <div className="style-options">
+                  <button 
+                    onClick={() => setGradientType('solid')} 
+                    className={`style-btn ${gradientType === 'solid' ? 'active' : ''}`}
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                      <rect x="4" y="4" width="16" height="16" rx="2"/>
+                    </svg>
+                    <span>{t.solidColor}</span>
+                  </button>
+                  <button 
+                    onClick={() => setGradientType('linear')} 
+                    className={`style-btn ${gradientType === 'linear' ? 'active' : ''}`}
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="url(#linearGrad)">
+                      <defs>
+                        <linearGradient id="linearGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                          <stop offset="0%" stopColor="currentColor"/>
+                          <stop offset="100%" stopColor="currentColor" stopOpacity="0.3"/>
+                        </linearGradient>
+                      </defs>
+                      <rect x="4" y="4" width="16" height="16" rx="2"/>
+                    </svg>
+                    <span>{t.linearGradient}</span>
+                  </button>
+                  <button 
+                    onClick={() => setGradientType('radial')} 
+                    className={`style-btn ${gradientType === 'radial' ? 'active' : ''}`}
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="url(#radialGrad)">
+                      <defs>
+                        <radialGradient id="radialGrad">
+                          <stop offset="0%" stopColor="currentColor"/>
+                          <stop offset="100%" stopColor="currentColor" stopOpacity="0.3"/>
+                        </radialGradient>
+                      </defs>
+                      <rect x="4" y="4" width="16" height="16" rx="2"/>
+                    </svg>
+                    <span>{t.radialGradient}</span>
+                  </button>
+                </div>
+              </div>
+
+              {gradientType !== 'solid' && (
+                <>
+                  <div className="form-group">
+                    <label className="label">{t.gradientColor1}</label>
+                    <div style={{display: 'flex', gap: '1rem', alignItems: 'center'}}>
+                      <input 
+                        type="color" 
+                        value={gradientColor1} 
+                        onChange={(e) => setGradientColor1(e.target.value)} 
+                        style={{width: '60px', height: '40px', border: 'none', borderRadius: '8px', cursor: 'pointer'}}
+                      />
+                      <input 
+                        type="text" 
+                        value={gradientColor1} 
+                        onChange={(e) => setGradientColor1(e.target.value)} 
+                        className="input" 
+                        placeholder="#000000"
+                        style={{flex: 1}}
+                      />
+                    </div>
+                  </div>
+                  <div className="form-group">
+                    <label className="label">{t.gradientColor2}</label>
+                    <div style={{display: 'flex', gap: '1rem', alignItems: 'center'}}>
+                      <input 
+                        type="color" 
+                        value={gradientColor2} 
+                        onChange={(e) => setGradientColor2(e.target.value)} 
+                        style={{width: '60px', height: '40px', border: 'none', borderRadius: '8px', cursor: 'pointer'}}
+                      />
+                      <input 
+                        type="text" 
+                        value={gradientColor2} 
+                        onChange={(e) => setGradientColor2(e.target.value)} 
+                        className="input" 
+                        placeholder="#4B5563"
+                        style={{flex: 1}}
+                      />
+                    </div>
+                  </div>
+                </>
+              )}
+
+              <div className="form-group">
+                <label className="label">{t.addLogo}</label>
+                {!logoImage ? (
+                  <label className="upload-btn">
+                    <input 
+                      type="file" 
+                      accept="image/*" 
+                      onChange={handleLogoUpload}
+                      style={{display: 'none'}}
+                    />
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                      <polyline points="17 8 12 3 7 8"/>
+                      <line x1="12" y1="3" x2="12" y2="15"/>
+                    </svg>
+                    <span>{t.uploadLogo}</span>
+                  </label>
+                ) : (
+                  <div className="logo-preview">
+                    <img src={logoImage} alt="Logo" style={{maxWidth: '100px', maxHeight: '100px', borderRadius: '8px'}} />
+                    <button onClick={removeLogo} className="btn-remove-logo">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                      </svg>
+                      {t.removeLogo}
+                    </button>
+                  </div>
+                )}
+              </div>
+
+              {logoImage && (
+                <div className="form-group">
+                  <label className="label">{t.logoSize}</label>
+                  <div className="style-options">
+                    <button 
+                      onClick={() => setLogoSize(0.2)} 
+                      className={`style-btn ${logoSize === 0.2 ? 'active' : ''}`}
+                    >
+                      <span>{t.small}</span>
+                    </button>
+                    <button 
+                      onClick={() => setLogoSize(0.3)} 
+                      className={`style-btn ${logoSize === 0.3 ? 'active' : ''}`}
+                    >
+                      <span>{t.medium}</span>
+                    </button>
+                    <button 
+                      onClick={() => setLogoSize(0.4)} 
+                      className={`style-btn ${logoSize === 0.4 ? 'active' : ''}`}
+                    >
+                      <span>{t.large}</span>
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              <div className="form-group">
                 <label className="label">{t.cornerStyle}</label>
                 <div className="style-options">
                   <button 
@@ -788,6 +987,11 @@ function App() {
                           bgColor={qrBgColor}
                           qrStyle={qrStyle}
                           cornerStyle={cornerStyle}
+                          logoImage={logoImage}
+                          logoSize={logoSize}
+                          gradientType={gradientType}
+                          gradientColor1={gradientColor1}
+                          gradientColor2={gradientColor2}
                         />
                       ) : (
                         <div className="barcode-container">

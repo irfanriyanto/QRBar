@@ -683,6 +683,58 @@ textarea.input {
   height: 24px;
 }
 
+.upload-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 2px dashed rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  color: #9CA3AF;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.upload-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #E5E7EB;
+}
+
+.logo-preview {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+}
+
+.btn-remove-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 8px;
+  color: #EF4444;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.btn-remove-logo:hover {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.5);
+}
+
 .btn-primary-gen,
 .btn-secondary-gen {
   flex: 1;
@@ -1345,6 +1397,34 @@ body.light-mode .style-btn.active {
   border-color: #374151;
   color: #FFFFFF;
   box-shadow: 0 4px 12px rgba(55, 65, 81, 0.2);
+}
+
+body.light-mode .upload-btn {
+  background: #F9FAFB;
+  border: 2px dashed #D1D5DB;
+  color: #6B7280;
+}
+
+body.light-mode .upload-btn:hover {
+  background: #F3F4F6;
+  border-color: #9CA3AF;
+  color: #374151;
+}
+
+body.light-mode .logo-preview {
+  background: #F9FAFB;
+  border: 1px solid #E5E7EB;
+}
+
+body.light-mode .btn-remove-logo {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #DC2626;
+}
+
+body.light-mode .btn-remove-logo:hover {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.4);
 }
 
 body.light-mode .format-btn-gen {
