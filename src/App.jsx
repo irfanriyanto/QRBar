@@ -1131,7 +1131,11 @@ function App() {
 
               <div className="form-group">
                 <label className="label">{t.frame}</label>
-                <div className="style-options">
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fill, minmax(90px, 1fr))',
+                  gap: '0.75rem'
+                }}>
                   <button 
                     onClick={() => setFrameStyle('none')} 
                     className={`style-btn ${frameStyle === 'none' ? 'active' : ''}`}
@@ -1142,42 +1146,139 @@ function App() {
                     <span>{t.noFrame}</span>
                   </button>
                   <button 
-                    onClick={() => setFrameStyle('bottom')} 
-                    className={`style-btn ${frameStyle === 'bottom' ? 'active' : ''}`}
+                    onClick={() => setFrameStyle('simple')} 
+                    className={`style-btn ${frameStyle === 'simple' ? 'active' : ''}`}
                   >
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                      <rect x="4" y="4" width="16" height="16" rx="2" fill="none" stroke="currentColor" strokeWidth="2"/>
-                      <rect x="4" y="16" width="16" height="4" rx="0 0 2 2"/>
+                      <rect x="4" y="4" width="16" height="12" rx="1" fill="none" stroke="currentColor" strokeWidth="2"/>
+                      <rect x="6" y="18" width="12" height="3" rx="1"/>
                     </svg>
-                    <span>{t.frameBottom}</span>
+                    <span>{t.simple}</span>
                   </button>
                   <button 
-                    onClick={() => setFrameStyle('top')} 
-                    className={`style-btn ${frameStyle === 'top' ? 'active' : ''}`}
+                    onClick={() => setFrameStyle('border')} 
+                    className={`style-btn ${frameStyle === 'border' ? 'active' : ''}`}
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <rect x="4" y="4" width="16" height="16" rx="2"/>
+                      <text x="12" y="19" fontSize="6" textAnchor="middle" fill="currentColor">Scan</text>
+                    </svg>
+                    <span>{t.border}</span>
+                  </button>
+                  <button 
+                    onClick={() => setFrameStyle('borderWhite')} 
+                    className={`style-btn ${frameStyle === 'borderWhite' ? 'active' : ''}`}
                   >
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                      <rect x="4" y="4" width="16" height="16" rx="2" fill="none" stroke="currentColor" strokeWidth="2"/>
-                      <rect x="4" y="4" width="16" height="4" rx="2 2 0 0"/>
+                      <rect x="4" y="4" width="16" height="16" rx="2"/>
+                      <text x="12" y="19" fontSize="6" textAnchor="middle" fill="white">Scan</text>
                     </svg>
-                    <span>{t.frameTop}</span>
+                    <span>{t.borderWhite}</span>
                   </button>
                   <button 
                     onClick={() => setFrameStyle('rounded')} 
                     className={`style-btn ${frameStyle === 'rounded' ? 'active' : ''}`}
                   >
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <rect x="4" y="4" width="16" height="16" rx="8"/>
+                      <rect x="4" y="4" width="16" height="16" rx="6"/>
+                      <text x="12" y="19" fontSize="6" textAnchor="middle" fill="currentColor">Scan</text>
                     </svg>
-                    <span>{t.frameRounded}</span>
+                    <span>{t.rounded}</span>
                   </button>
                   <button 
-                    onClick={() => setFrameStyle('bold')} 
-                    className={`style-btn ${frameStyle === 'bold' ? 'active' : ''}`}
+                    onClick={() => setFrameStyle('roundedBlack')} 
+                    className={`style-btn ${frameStyle === 'roundedBlack' ? 'active' : ''}`}
                   >
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4">
-                      <rect x="4" y="4" width="16" height="16" rx="2"/>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                      <rect x="4" y="4" width="16" height="16" rx="6"/>
+                      <text x="12" y="19" fontSize="6" textAnchor="middle" fill="white">Scan</text>
                     </svg>
-                    <span>{t.frameBold}</span>
+                    <span>{t.roundedBlack}</span>
+                  </button>
+                  <button 
+                    onClick={() => setFrameStyle('handwritten')} 
+                    className={`style-btn ${frameStyle === 'handwritten' ? 'active' : ''}`}
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <rect x="4" y="4" width="16" height="12" rx="1"/>
+                      <text x="12" y="21" fontSize="5" textAnchor="middle" fill="currentColor" fontStyle="italic">Scan</text>
+                    </svg>
+                    <span>{t.handwritten}</span>
+                  </button>
+                  <button 
+                    onClick={() => setFrameStyle('arrow')} 
+                    className={`style-btn ${frameStyle === 'arrow' ? 'active' : ''}`}
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <rect x="4" y="6" width="10" height="10" rx="1"/>
+                      <path d="M16 11 L20 11 M20 11 L18 9 M20 11 L18 13"/>
+                    </svg>
+                    <span>{t.arrow}</span>
+                  </button>
+                  <button 
+                    onClick={() => setFrameStyle('shoppingBag')} 
+                    className={`style-btn ${frameStyle === 'shoppingBag' ? 'active' : ''}`}
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M6 8 L18 8 L18 20 Q18 21 17 21 L7 21 Q6 21 6 20 Z"/>
+                      <path d="M9 8 Q9 5 12 5 Q15 5 15 8" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+                    </svg>
+                    <span>{t.shoppingBag}</span>
+                  </button>
+                  <button 
+                    onClick={() => setFrameStyle('giftBox')} 
+                    className={`style-btn ${frameStyle === 'giftBox' ? 'active' : ''}`}
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                      <rect x="6" y="10" width="12" height="11" rx="1"/>
+                      <rect x="11" y="10" width="2" height="11" fill="white"/>
+                      <rect x="6" y="14" width="12" height="2" fill="white"/>
+                      <path d="M12 7 Q10 5 8 7 Q10 6 12 7 Q14 6 16 7 Q14 5 12 7" fill="white"/>
+                    </svg>
+                    <span>{t.giftBox}</span>
+                  </button>
+                  <button 
+                    onClick={() => setFrameStyle('envelope')} 
+                    className={`style-btn ${frameStyle === 'envelope' ? 'active' : ''}`}
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                      <rect x="4" y="7" width="16" height="12" rx="1"/>
+                      <path d="M4 7 L12 13 L20 7"/>
+                    </svg>
+                    <span>{t.envelope}</span>
+                  </button>
+                  <button 
+                    onClick={() => setFrameStyle('delivery')} 
+                    className={`style-btn ${frameStyle === 'delivery' ? 'active' : ''}`}
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                      <rect x="4" y="6" width="10" height="10" rx="1"/>
+                      <circle cx="8" cy="18" r="2"/>
+                      <circle cx="16" cy="18" r="2"/>
+                      <path d="M14 16 L14 10 L18 10 L20 14 L20 16"/>
+                    </svg>
+                    <span>{t.delivery}</span>
+                  </button>
+                  <button 
+                    onClick={() => setFrameStyle('handPhone')} 
+                    className={`style-btn ${frameStyle === 'handPhone' ? 'active' : ''}`}
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                      <rect x="6" y="4" width="8" height="10" rx="1"/>
+                      <path d="M5 14 Q4 13 4 12 L4 10 Q4 9 5 9 L6 9 L6 8 Q6 7 7 7 Q8 7 8 8 L8 9 L9 9 L9 8 Q9 7 10 7 Q11 7 11 8 L11 9 L12 9 L12 8 Q12 7 13 7 Q14 7 14 8 L14 12 Q14 14 13 15 L10 17 Q8 17 7 16 Z" fill="currentColor"/>
+                    </svg>
+                    <span>{t.handPhone}</span>
+                  </button>
+                  <button 
+                    onClick={() => setFrameStyle('smartphone')} 
+                    className={`style-btn ${frameStyle === 'smartphone' ? 'active' : ''}`}
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                      <rect x="6" y="3" width="12" height="18" rx="2"/>
+                      <rect x="7" y="5" width="10" height="13" rx="1" fill="white"/>
+                      <circle cx="12" cy="19" r="1" fill="white"/>
+                    </svg>
+                    <span>{t.smartphone}</span>
                   </button>
                 </div>
               </div>

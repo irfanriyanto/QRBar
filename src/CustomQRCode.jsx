@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import QRCodeStyling from 'qr-code-styling';
+import { QRFrames } from './QRFrames';
 
 const CustomQRCode = ({ 
   value, 
@@ -177,31 +178,12 @@ const CustomQRCode = ({
     }
   }, [value, qrColor, bgColor, qrStyle, cornerStyle, logoImage, logoSize, gradientType, gradientColor1, gradientColor2]);
 
+  const FrameComponent = QRFrames[frameStyle] || QRFrames.none;
+
   return (
-    <div style={{ position: 'relative', display: 'inline-block' }}>
+    <FrameComponent frameText={frameText}>
       <div ref={ref} />
-      {frameStyle !== 'none' && (
-        <div style={{
-          position: 'absolute',
-          bottom: frameStyle === 'bottom' ? '-30px' : frameStyle === 'top' ? 'auto' : '50%',
-          top: frameStyle === 'top' ? '-30px' : 'auto',
-          left: '50%',
-          transform: frameStyle === 'bottom' || frameStyle === 'top' ? 'translateX(-50%)' : 'translate(-50%, -50%)',
-          background: frameStyle === 'rounded' ? 'rgba(0, 0, 0, 0.8)' : frameStyle === 'bold' ? 'rgba(0, 0, 0, 0.9)' : '#000',
-          color: '#fff',
-          padding: frameStyle === 'rounded' ? '8px 20px' : frameStyle === 'bold' ? '10px 24px' : '6px 16px',
-          borderRadius: frameStyle === 'rounded' ? '20px' : frameStyle === 'bold' ? '8px' : '4px',
-          fontSize: frameStyle === 'bold' ? '14px' : '12px',
-          fontWeight: frameStyle === 'bold' ? '700' : '600',
-          whiteSpace: 'nowrap',
-          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3)',
-          border: frameStyle === 'bold' ? '2px solid #fff' : 'none',
-          zIndex: 10
-        }}>
-          {frameText}
-        </div>
-      )}
-    </div>
+    </FrameComponent>
   );
 };
 
