@@ -59,6 +59,7 @@ function App() {
   const [frameStyle, setFrameStyle] = useState('none'); // none, banner, box, circular
   const [frameText, setFrameText] = useState('Scan me!');
   const [logoTab, setLogoTab] = useState('preset'); // preset or custom
+  const [transparentBg, setTransparentBg] = useState(false);
   
   const downloadRef = useRef(null);
   const t = translations[language];
@@ -335,7 +336,7 @@ function App() {
           gradient: dotsGradient
         },
         backgroundOptions: {
-          color: qrBgColor
+          color: transparentBg ? 'transparent' : qrBgColor
         },
         cornersSquareOptions: {
           type: cornerSquareOptions[cornerStyle] || 'square',
@@ -414,24 +415,6 @@ function App() {
 
   const removeLogo = () => {
     setLogoImage(null);
-  };
-
-  const getIconBackground = (iconId) => {
-    const backgrounds = {
-      instagram: 'linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)',
-      facebook: '#1877F2',
-      twitter: '#000000',
-      youtube: '#FF0000',
-      whatsapp: '#25D366',
-      tiktok: '#000000',
-      linkedin: '#0A66C2',
-      gmail: '#EA4335',
-      spotify: '#1DB954',
-      github: '#181717',
-      telegram: '#26A5E4',
-      discord: '#5865F2'
-    };
-    return backgrounds[iconId] || '#6B7280';
   };
 
   if (!showGenerator) {
@@ -784,12 +767,13 @@ function App() {
 
               <div className="form-group">
                 <label className="label">{t.backgroundColor}</label>
-                <div style={{display: 'flex', gap: '1rem', alignItems: 'center'}}>
+                <div style={{display: 'flex', gap: '1rem', alignItems: 'center', marginBottom: '0.5rem'}}>
                   <input 
                     type="color" 
                     value={qrBgColor} 
                     onChange={(e) => setQrBgColor(e.target.value)} 
-                    style={{width: '60px', height: '40px', border: 'none', borderRadius: '8px', cursor: 'pointer'}}
+                    style={{width: '60px', height: '40px', border: 'none', borderRadius: '8px', cursor: 'pointer', opacity: transparentBg ? 0.5 : 1}}
+                    disabled={transparentBg}
                   />
                   <input 
                     type="text" 
@@ -797,9 +781,19 @@ function App() {
                     onChange={(e) => setQrBgColor(e.target.value)} 
                     className="input" 
                     placeholder="#FFFFFF"
-                    style={{flex: 1}}
+                    style={{flex: 1, opacity: transparentBg ? 0.5 : 1}}
+                    disabled={transparentBg}
                   />
                 </div>
+                <label style={{display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontSize: '0.9rem', color: '#9CA3AF'}}>
+                  <input 
+                    type="checkbox" 
+                    checked={transparentBg}
+                    onChange={(e) => setTransparentBg(e.target.checked)}
+                    style={{width: '18px', height: '18px', cursor: 'pointer'}}
+                  />
+                  <span>{t.transparentBackground}</span>
+                </label>
               </div>
 
               <div className="form-group">
@@ -1003,25 +997,15 @@ function App() {
                             e.currentTarget.style.transform = 'scale(1)';
                           }}
                         >
-                          <div style={{
-                            width: '48px', 
-                            height: '48px', 
-                            borderRadius: '8px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            background: getIconBackground(icon.id)
-                          }}>
-                            <img 
-                              src={icon.svg} 
-                              alt={icon.name} 
-                              style={{
-                                width: '32px', 
-                                height: '32px',
-                                filter: 'brightness(0) invert(1)'
-                              }} 
-                            />
-                          </div>
+                          <img 
+                            src={icon.svg} 
+                            alt={icon.name} 
+                            style={{
+                              width: '48px', 
+                              height: '48px',
+                              borderRadius: '8px'
+                            }} 
+                          />
                           <span style={{fontSize: '0.75rem', color: '#9CA3AF', textAlign: 'center'}}>{icon.name}</span>
                         </button>
                       ))}
@@ -1267,7 +1251,7 @@ function App() {
                           value={generateData()} 
                           size={240}
                           qrColor={qrColor}
-                          bgColor={qrBgColor}
+                          bgColor={transparentBg ? 'transparent' : qrBgColor}
                           qrStyle={qrStyle}
                           cornerStyle={cornerStyle}
                           logoImage={logoImage}

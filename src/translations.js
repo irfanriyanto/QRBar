@@ -31,6 +31,7 @@ export const translations = {
     // QR Customization
     qrColor: "QR Color",
     backgroundColor: "Background Color",
+    transparentBackground: "Transparent Background",
     patternStyle: "Pattern Style",
     cornerStyle: "Corner Style",
     standard: "Standard",
@@ -168,6 +169,7 @@ export const translations = {
     // QR Customization
     qrColor: "Warna QR",
     backgroundColor: "Warna Background",
+    transparentBackground: "Background Transparan",
     patternStyle: "Style Pattern",
     cornerStyle: "Style Sudut",
     standard: "Standar",
