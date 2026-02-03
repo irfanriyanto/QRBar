@@ -1206,16 +1206,6 @@ function App() {
                     <span>{t.handwritten}</span>
                   </button>
                   <button 
-                    onClick={() => setFrameStyle('arrow')} 
-                    className={`style-btn ${frameStyle === 'arrow' ? 'active' : ''}`}
-                  >
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <rect x="4" y="6" width="10" height="10" rx="1"/>
-                      <path d="M16 11 L20 11 M20 11 L18 9 M20 11 L18 13"/>
-                    </svg>
-                    <span>{t.arrow}</span>
-                  </button>
-                  <button 
                     onClick={() => setFrameStyle('shoppingBag')} 
                     className={`style-btn ${frameStyle === 'shoppingBag' ? 'active' : ''}`}
                   >

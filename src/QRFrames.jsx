@@ -149,35 +149,6 @@ export const QRFrames = {
     </div>
   ),
 
-  arrow: ({ children, frameText }) => (
-    <div style={{ position: 'relative', display: 'inline-block' }}>
-      {children}
-      {/* Arrow pointing to QR */}
-      <svg style={{
-        position: 'absolute',
-        left: '-45px',
-        top: '50%',
-        transform: 'translateY(-50%) rotate(180deg)',
-        width: '35px',
-        height: '35px'
-      }} viewBox="0 0 40 40" fill="none">
-        <path d="M5 20 L25 20 M25 20 L18 13 M25 20 L18 27" stroke="#000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-      <div style={{
-        position: 'absolute',
-        left: '-120px',
-        top: '50%',
-        transform: 'translateY(-50%)',
-        fontSize: '12px',
-        fontWeight: '600',
-        color: '#000',
-        whiteSpace: 'nowrap'
-      }}>
-        {frameText}
-      </div>
-    </div>
-  ),
-
   shoppingBag: ({ children, frameText }) => (
     <div style={{ 
       position: 'relative', 
@@ -217,40 +188,50 @@ export const QRFrames = {
     <div style={{ 
       position: 'relative', 
       display: 'inline-block',
-      padding: '40px 20px 50px 20px',
-      background: '#000',
-      borderRadius: '8px',
+      padding: '45px 25px 50px 25px',
+      background: '#E53E3E',
+      borderRadius: '12px',
       boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)'
     }}>
-      {/* Ribbon vertical */}
+      {/* Ribbon vertical - white */}
       <div style={{
         position: 'absolute',
-        top: '30px',
+        top: '35px',
         left: '50%',
         transform: 'translateX(-50%)',
-        width: '4px',
-        height: 'calc(100% - 30px)',
-        background: '#fff'
+        width: '8px',
+        height: 'calc(100% - 35px)',
+        background: '#FFD700',
+        boxShadow: '0 0 0 2px rgba(255, 255, 255, 0.3)'
       }} />
-      {/* Ribbon horizontal */}
+      {/* Ribbon horizontal - white */}
       <div style={{
         position: 'absolute',
         top: '50%',
         left: '0',
         width: '100%',
-        height: '4px',
-        background: '#fff'
+        height: '8px',
+        background: '#FFD700',
+        boxShadow: '0 0 0 2px rgba(255, 255, 255, 0.3)'
       }} />
-      {/* Bow */}
+      {/* Bow - larger and more visible */}
       <svg style={{
         position: 'absolute',
-        top: '5px',
+        top: '8px',
         left: '50%',
         transform: 'translateX(-50%)',
-        width: '50px',
-        height: '30px'
-      }} viewBox="0 0 50 30" fill="none">
-        <path d="M25 15 Q15 5 10 15 Q15 10 25 15 Q35 10 40 15 Q35 5 25 15" fill="#fff" stroke="#fff" strokeWidth="1"/>
+        width: '60px',
+        height: '35px'
+      }} viewBox="0 0 60 35" fill="none">
+        {/* Left bow loop */}
+        <ellipse cx="18" cy="18" rx="15" ry="12" fill="#FFD700" stroke="#FFF" strokeWidth="2"/>
+        {/* Right bow loop */}
+        <ellipse cx="42" cy="18" rx="15" ry="12" fill="#FFD700" stroke="#FFF" strokeWidth="2"/>
+        {/* Center knot */}
+        <circle cx="30" cy="18" r="8" fill="#FFD700" stroke="#FFF" strokeWidth="2"/>
+        {/* Ribbon tails */}
+        <path d="M22 26 L15 32 L18 28 Z" fill="#FFD700" stroke="#FFF" strokeWidth="1.5"/>
+        <path d="M38 26 L45 32 L42 28 Z" fill="#FFD700" stroke="#FFF" strokeWidth="1.5"/>
       </svg>
       {children}
       <div style={{
@@ -259,9 +240,10 @@ export const QRFrames = {
         left: '50%',
         transform: 'translateX(-50%)',
         fontSize: '13px',
-        fontWeight: '600',
+        fontWeight: '700',
         color: '#fff',
-        whiteSpace: 'nowrap'
+        whiteSpace: 'nowrap',
+        textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)'
       }}>
         {frameText}
       </div>
