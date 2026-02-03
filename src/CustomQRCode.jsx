@@ -65,7 +65,7 @@ const CustomQRCode = ({
       dotsColor = undefined;
     }
 
-    if (!qrCode.current) {
+    if (!qrCode.current && ref.current) {
       qrCode.current = new QRCodeStyling({
         width: size,
         height: size,
@@ -100,9 +100,12 @@ const CustomQRCode = ({
         },
         image: logoImage || undefined
       });
+      
+      // Clear any existing content first
+      ref.current.innerHTML = '';
       qrCode.current.append(ref.current);
     }
-  }, []);
+  }, [ref.current]);
 
   useEffect(() => {
     if (qrCode.current) {
@@ -182,7 +185,7 @@ const CustomQRCode = ({
 
   return (
     <FrameComponent frameText={frameText}>
-      <div ref={ref} />
+      <div ref={ref} style={{ display: 'inline-block' }} />
     </FrameComponent>
   );
 };
