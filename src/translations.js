@@ -63,7 +63,6 @@ export const translations = {
     borderWhite: "Border Black",
     rounded: "Rounded",
     roundedBlack: "Rounded Black",
-    handwritten: "Handwritten",
     scanMe: "Scan me!",
     
     // Types
@@ -201,7 +200,6 @@ export const translations = {
     borderWhite: "Border Hitam",
     rounded: "Bulat",
     roundedBlack: "Bulat Hitam",
-    handwritten: "Tulisan Tangan",
     scanMe: "Scan me!",
     
     // Types

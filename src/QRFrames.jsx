@@ -176,25 +176,5 @@ export const QRFrames = {
         </div>
       </div>
     );
-  },
-
-  handwritten: ({ children, frameText }) => (
-    <div style={{ position: 'relative', display: 'inline-block' }}>
-      {children}
-      <div style={{
-        position: 'absolute',
-        bottom: '-40px',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        fontSize: '16px',
-        fontWeight: '400',
-        fontStyle: 'italic',
-        color: '#000',
-        whiteSpace: 'nowrap',
-        fontFamily: 'cursive'
-      }}>
-        {frameText}
-      </div>
-    </div>
-  )
+  }
 };
