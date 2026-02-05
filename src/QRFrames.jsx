@@ -36,7 +36,7 @@ export const QRFrames = {
     const padding = Math.round(16 * scale);
     const bottomPadding = Math.round(65 * scale);
     const fontSize = Math.round(22 * scale);
-    const bottomOffset = Math.round(32.5 * scale); // Centered: (65 - 22) / 2 + 22/2 ≈ 32.5
+    const bottomOffset = Math.round(21.5 * scale); // Adjusted for better visual centering
     const borderWidth = Math.max(3, Math.round(3 * scale));
     const borderRadius = Math.round(12 * scale);
 
@@ -58,7 +58,8 @@ export const QRFrames = {
           fontSize: `${fontSize}px`,
           fontWeight: '600',
           color: '#000',
-          whiteSpace: 'nowrap'
+          whiteSpace: 'nowrap',
+          lineHeight: '1'
         }}>
           {frameText}
         </div>
@@ -72,7 +73,7 @@ export const QRFrames = {
     const padding = Math.round(16 * scale);
     const bottomPadding = Math.round(65 * scale);
     const fontSize = Math.round(22 * scale);
-    const bottomOffset = Math.round(32.5 * scale);
+    const bottomOffset = Math.round(21.5 * scale);
     const borderWidth = Math.max(3, Math.round(3 * scale));
     const borderRadius = Math.round(12 * scale);
 
@@ -94,7 +95,8 @@ export const QRFrames = {
           fontSize: `${fontSize}px`,
           fontWeight: '600',
           color: '#fff',
-          whiteSpace: 'nowrap'
+          whiteSpace: 'nowrap',
+          lineHeight: '1'
         }}>
           {frameText}
         </div>
@@ -108,7 +110,7 @@ export const QRFrames = {
     const padding = Math.round(16 * scale);
     const bottomPadding = Math.round(65 * scale);
     const fontSize = Math.round(22 * scale);
-    const bottomOffset = Math.round(32.5 * scale);
+    const bottomOffset = Math.round(21.5 * scale);
     const borderWidth = Math.max(3, Math.round(3 * scale));
     const borderRadius = Math.round(30 * scale);
 
@@ -130,7 +132,8 @@ export const QRFrames = {
           fontSize: `${fontSize}px`,
           fontWeight: '600',
           color: '#000',
-          whiteSpace: 'nowrap'
+          whiteSpace: 'nowrap',
+          lineHeight: '1'
         }}>
           {frameText}
         </div>
@@ -144,7 +147,7 @@ export const QRFrames = {
     const padding = Math.round(16 * scale);
     const bottomPadding = Math.round(65 * scale);
     const fontSize = Math.round(22 * scale);
-    const bottomOffset = Math.round(32.5 * scale);
+    const bottomOffset = Math.round(21.5 * scale);
     const borderWidth = Math.max(3, Math.round(3 * scale));
     const borderRadius = Math.round(30 * scale);
 
@@ -166,7 +169,8 @@ export const QRFrames = {
           fontSize: `${fontSize}px`,
           fontWeight: '600',
           color: '#fff',
-          whiteSpace: 'nowrap'
+          whiteSpace: 'nowrap',
+          lineHeight: '1'
         }}>
           {frameText}
         </div>
