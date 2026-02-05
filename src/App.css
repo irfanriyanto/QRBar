@@ -1131,11 +1131,11 @@ body.light-mode .phone-statusbar {
   }
   
   .type-grid-gen {
-    justify-items: center;
+    grid-template-columns: 1fr;
   }
   
   .type-card-gen {
-    max-width: 100%;
+    width: 100%;
   }
 }
 
