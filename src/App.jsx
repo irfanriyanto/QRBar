@@ -698,7 +698,9 @@ function App() {
 
       <div className="generator-container">
         <div className="generator-wrapper">
-          <div className="type-selector-gen">
+          {/* Left Column - Forms */}
+          <div className="generator-left-column">
+            <div className="type-selector-gen">
             <h3 className="section-title">{t.selectType}</h3>
             <div className="type-grid-gen">
               {qrTypes.map((type) => (
@@ -1235,8 +1237,11 @@ function App() {
               </button>
             </div>
           </div>
+          </div>
 
-          <div className="preview-card-gen">
+          {/* Right Column - Preview (Sticky) */}
+          <div className="generator-right-column">
+            <div className="preview-card-gen">
             <h3 className="section-title">{t.preview}</h3>
             <div className="preview-wrapper-gen">
               <div className="phone-mockup">
@@ -1281,6 +1286,7 @@ function App() {
                 </div>
               </div>
             </div>
+          </div>
           </div>
 
           <div style={{ position: 'absolute', left: '-9999px' }}>

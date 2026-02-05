@@ -454,8 +454,33 @@ body {
 }
 
 .generator-wrapper {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 2rem;
+  align-items: start;
+}
+
+.generator-left-column {
+  width: 100%;
+}
+
+.generator-right-column {
+  position: sticky;
+  top: 100px;
+  height: fit-content;
+}
+
+@media (max-width: 1024px) {
+  .generator-wrapper {
+    grid-template-columns: 1fr;
+  }
+  
+  .generator-right-column {
+    position: relative;
+    top: 0;
+  }
 }
 
 .type-selector-gen {
