@@ -1303,10 +1303,10 @@ function App() {
             
             {/* Hidden element for QR with frame download */}
             {codeFormat === 'qr' && frameStyle !== 'none' && (
-              <div ref={qrWithFrameRef} style={{ display: 'inline-block' }}>
+              <div ref={qrWithFrameRef} style={{ display: 'inline-block', padding: '40px', background: transparentBg ? 'transparent' : '#F8F8F8' }}>
                 <CustomQRCode 
                   value={generateData()} 
-                  size={800}
+                  size={600}
                   qrColor={qrColor}
                   bgColor={transparentBg ? 'transparent' : qrBgColor}
                   qrStyle={qrStyle}
