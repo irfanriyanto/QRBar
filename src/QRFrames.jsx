@@ -36,7 +36,7 @@ export const QRFrames = {
     const padding = Math.round(16 * scale);
     const bottomPadding = Math.round(65 * scale);
     const fontSize = Math.round(22 * scale);
-    const bottomOffset = Math.round(23 * scale);
+    const bottomOffset = Math.round(32.5 * scale); // Centered: (65 - 22) / 2 + 22/2 ≈ 32.5
     const borderWidth = Math.max(3, Math.round(3 * scale));
     const borderRadius = Math.round(12 * scale);
 
@@ -72,7 +72,7 @@ export const QRFrames = {
     const padding = Math.round(16 * scale);
     const bottomPadding = Math.round(65 * scale);
     const fontSize = Math.round(22 * scale);
-    const bottomOffset = Math.round(23 * scale);
+    const bottomOffset = Math.round(32.5 * scale);
     const borderWidth = Math.max(3, Math.round(3 * scale));
     const borderRadius = Math.round(12 * scale);
 
@@ -108,7 +108,7 @@ export const QRFrames = {
     const padding = Math.round(16 * scale);
     const bottomPadding = Math.round(65 * scale);
     const fontSize = Math.round(22 * scale);
-    const bottomOffset = Math.round(23 * scale);
+    const bottomOffset = Math.round(32.5 * scale);
     const borderWidth = Math.max(3, Math.round(3 * scale));
     const borderRadius = Math.round(30 * scale);
 
@@ -144,7 +144,7 @@ export const QRFrames = {
     const padding = Math.round(16 * scale);
     const bottomPadding = Math.round(65 * scale);
     const fontSize = Math.round(22 * scale);
-    const bottomOffset = Math.round(23 * scale);
+    const bottomOffset = Math.round(32.5 * scale);
     const borderWidth = Math.max(3, Math.round(3 * scale));
     const borderRadius = Math.round(30 * scale);
 
