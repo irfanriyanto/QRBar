@@ -831,6 +831,10 @@ textarea.input {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
+.preview-card-gen .section-title {
+  text-align: center;
+}
+
 .preview-wrapper-gen {
   background: transparent;
   padding: 3rem;
