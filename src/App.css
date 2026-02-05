@@ -1109,8 +1109,12 @@ body.light-mode .phone-statusbar {
     padding: 0 1rem;
   }
   
-  .btn-back span {
+  .btn-back-text {
     display: none;
+  }
+  
+  .btn-back {
+    padding: 0.625rem;
   }
 }
 
