@@ -62,6 +62,7 @@ function App() {
   const [transparentBg, setTransparentBg] = useState(false);
   
   const downloadRef = useRef(null);
+  const qrWithFrameRef = useRef(null);
   const t = translations[language];
 
   // Preset icons - using colored icons from reliable CDN
@@ -268,95 +269,113 @@ function App() {
 
   const downloadCode = async () => {
     if (codeFormat === 'qr') {
-      // For custom QR, use qr-code-styling download
-      const QRCodeStyling = (await import('qr-code-styling')).default;
-      
-      const dotsOptions = {
-        squares: 'square',
-        dots: 'dots',
-        rounded: 'rounded'
-      };
-
-      const cornerSquareOptions = {
-        square: 'square',
-        rounded: 'extra-rounded',
-        extraRounded: 'extra-rounded'
-      };
-
-      const cornerDotOptions = {
-        square: 'square',
-        rounded: 'dot',
-        extraRounded: 'dot'
-      };
-
-      // Prepare dots color based on gradient type
-      let dotsColor = qrColor;
-      let dotsGradient = null;
-
-      if (gradientType === 'linear') {
-        dotsGradient = {
-          type: 'linear',
-          rotation: 0,
-          colorStops: [
-            { offset: 0, color: gradientColor1 },
-            { offset: 1, color: gradientColor2 }
-          ]
+      // If frame is selected, use html2canvas to capture QR with frame
+      if (frameStyle !== 'none' && qrWithFrameRef.current) {
+        const html2canvas = (await import('html2canvas')).default;
+        const canvas = await html2canvas(qrWithFrameRef.current, {
+          backgroundColor: transparentBg ? null : qrBgColor,
+          scale: 3,
+          useCORS: true,
+          allowTaint: true,
+          logging: false
+        });
+        const link = document.createElement('a');
+        const timestamp = new Date().toISOString().slice(0,10);
+        link.download = `qrbar-${selectedType}-${timestamp}.png`;
+        link.href = canvas.toDataURL('image/png', 1.0);
+        link.click();
+      } else {
+        // For QR without frame, use qr-code-styling download
+        const QRCodeStyling = (await import('qr-code-styling')).default;
+        
+        const dotsOptions = {
+          squares: 'square',
+          dots: 'dots',
+          rounded: 'rounded'
         };
-        dotsColor = undefined;
-      } else if (gradientType === 'radial') {
-        dotsGradient = {
-          type: 'radial',
-          colorStops: [
-            { offset: 0, color: gradientColor1 },
-            { offset: 1, color: gradientColor2 }
-          ]
+
+        const cornerSquareOptions = {
+          square: 'square',
+          rounded: 'extra-rounded',
+          extraRounded: 'extra-rounded'
         };
-        dotsColor = undefined;
+
+        const cornerDotOptions = {
+          square: 'square',
+          rounded: 'dot',
+          extraRounded: 'dot'
+        };
+
+        // Prepare dots color based on gradient type
+        let dotsColor = qrColor;
+        let dotsGradient = null;
+
+        if (gradientType === 'linear') {
+          dotsGradient = {
+            type: 'linear',
+            rotation: 0,
+            colorStops: [
+              { offset: 0, color: gradientColor1 },
+              { offset: 1, color: gradientColor2 }
+            ]
+          };
+          dotsColor = undefined;
+        } else if (gradientType === 'radial') {
+          dotsGradient = {
+            type: 'radial',
+            colorStops: [
+              { offset: 0, color: gradientColor1 },
+              { offset: 1, color: gradientColor2 }
+            ]
+          };
+          dotsColor = undefined;
+        }
+
+        const qrCode = new QRCodeStyling({
+          width: 1024,
+          height: 1024,
+          data: generateData(),
+          margin: 20,
+          qrOptions: {
+            typeNumber: 0,
+            mode: 'Byte',
+            errorCorrectionLevel: 'H'
+          },
+          imageOptions: {
+            hideBackgroundDots: true,
+            imageSize: logoImage ? logoSize : 0,
+            margin: 10,
+            crossOrigin: 'anonymous'
+          },
+          dotsOptions: {
+            type: dotsOptions[qrStyle] || 'square',
+            color: dotsColor,
+            gradient: dotsGradient
+          },
+          backgroundOptions: {
+            color: transparentBg ? 'transparent' : qrBgColor
+          },
+          cornersSquareOptions: {
+            type: cornerSquareOptions[cornerStyle] || 'square',
+            color: gradientType === 'solid' ? qrColor : gradientColor1
+          },
+          cornersDotOptions: {
+            type: cornerDotOptions[cornerStyle] || 'square',
+            color: gradientType === 'solid' ? qrColor : gradientColor1
+          },
+          image: logoImage || undefined
+        });
+
+        const timestamp = new Date().toISOString().slice(0,10);
+        qrCode.download({
+          name: `qrbar-${selectedType}-${timestamp}`,
+          extension: 'png'
+        });
       }
-
-      const qrCode = new QRCodeStyling({
-        width: 1024,
-        height: 1024,
-        data: generateData(),
-        margin: 20,
-        qrOptions: {
-          typeNumber: 0,
-          mode: 'Byte',
-          errorCorrectionLevel: 'H'
-        },
-        imageOptions: {
-          hideBackgroundDots: true,
-          imageSize: logoImage ? logoSize : 0,
-          margin: 10,
-          crossOrigin: 'anonymous'
-        },
-        dotsOptions: {
-          type: dotsOptions[qrStyle] || 'square',
-          color: dotsColor,
-          gradient: dotsGradient
-        },
-        backgroundOptions: {
-          color: transparentBg ? 'transparent' : qrBgColor
-        },
-        cornersSquareOptions: {
-          type: cornerSquareOptions[cornerStyle] || 'square',
-          color: gradientType === 'solid' ? qrColor : gradientColor1
-        },
-        cornersDotOptions: {
-          type: cornerDotOptions[cornerStyle] || 'square',
-          color: gradientType === 'solid' ? qrColor : gradientColor1
-        },
-        image: logoImage || undefined
-      });
-
-      const timestamp = new Date().toISOString().slice(0,10);
-      qrCode.download({
-        name: `qrbar-${selectedType}-${timestamp}`,
-        extension: 'png'
-      });
     } else {
       // For barcode, use html2canvas
       if (downloadRef.current) {
+        const html2canvas = (await import('html2canvas')).default;
         const canvas = await html2canvas(downloadRef.current, {
           backgroundColor: '#ffffff',
           scale: 5,
@@ -1275,11 +1294,33 @@ function App() {
           </div>
 
           <div style={{ position: 'absolute', left: '-9999px' }}>
+            {/* Hidden element for barcode download */}
             <div ref={downloadRef} style={{ background: 'white', padding: '40px', display: 'inline-block' }}>
               {codeFormat === 'barcode' && (
                 <Barcode value={generateData()} format={barcodeFormat} width={3} height={150} displayValue={true} fontSize={20} />
               )}
             </div>
+            
+            {/* Hidden element for QR with frame download */}
+            {codeFormat === 'qr' && frameStyle !== 'none' && (
+              <div ref={qrWithFrameRef} style={{ display: 'inline-block' }}>
+                <CustomQRCode 
+                  value={generateData()} 
+                  size={800}
+                  qrColor={qrColor}
+                  bgColor={transparentBg ? 'transparent' : qrBgColor}
+                  qrStyle={qrStyle}
+                  cornerStyle={cornerStyle}
+                  logoImage={logoImage}
+                  logoSize={logoSize}
+                  gradientType={gradientType}
+                  gradientColor1={gradientColor1}
+                  gradientColor2={gradientColor2}
+                  frameStyle={frameStyle}
+                  frameText={frameText}
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>
