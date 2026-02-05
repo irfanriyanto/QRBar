@@ -60,6 +60,7 @@ function App() {
   const [frameText, setFrameText] = useState('Scan me!');
   const [logoTab, setLogoTab] = useState('preset'); // preset or custom
   const [transparentBg, setTransparentBg] = useState(false);
+  const [isCustomLogo, setIsCustomLogo] = useState(false); // Track if logo is custom upload
   
   const downloadRef = useRef(null);
   const qrWithFrameRef = useRef(null);
@@ -427,6 +428,7 @@ function App() {
       const reader = new FileReader();
       reader.onload = (event) => {
         setLogoImage(event.target.result);
+        setIsCustomLogo(true); // Mark as custom upload
       };
       reader.readAsDataURL(file);
     }
@@ -434,6 +436,7 @@ function App() {
 
   const removeLogo = () => {
     setLogoImage(null);
+    setIsCustomLogo(false);
   };
 
   if (!showGenerator) {
@@ -995,7 +998,10 @@ function App() {
                       return (
                         <button
                           key={icon.id}
-                          onClick={() => setLogoImage(icon.svg)}
+                          onClick={() => {
+                            setLogoImage(icon.svg);
+                            setIsCustomLogo(false); // Mark as preset icon
+                          }}
                           style={{
                             padding: '0.75rem',
                             background: isSelected ? 'rgba(107, 114, 128, 0.3)' : 'rgba(255, 255, 255, 0.03)',
@@ -1058,7 +1064,7 @@ function App() {
                   </div>
                 ) : (
                   // Custom upload
-                  !logoImage ? (
+                  !logoImage || !isCustomLogo ? (
                     <label className="upload-btn">
                       <input 
                         type="file" 
