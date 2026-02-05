@@ -978,46 +978,70 @@ function App() {
                 </div>
 
                 {logoTab === 'preset' ? (
-                  // Preset icons grid
-                  !logoImage ? (
-                    <div className="preset-icons-grid" style={{
-                      display: 'grid',
-                      gridTemplateColumns: 'repeat(auto-fill, minmax(80px, 1fr))',
-                      gap: '0.75rem',
-                      maxHeight: '300px',
-                      overflowY: 'auto',
-                      padding: '0.5rem',
-                      background: 'rgba(255, 255, 255, 0.02)',
-                      borderRadius: '12px',
-                      border: '1px solid rgba(255, 255, 255, 0.08)'
-                    }}>
-                      {presetIcons.map((icon) => (
+                  // Preset icons grid - always show, highlight selected
+                  <div className="preset-icons-grid" style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fill, minmax(80px, 1fr))',
+                    gap: '0.75rem',
+                    maxHeight: '300px',
+                    overflowY: 'auto',
+                    padding: '0.5rem',
+                    background: 'rgba(255, 255, 255, 0.02)',
+                    borderRadius: '12px',
+                    border: '1px solid rgba(255, 255, 255, 0.08)'
+                  }}>
+                    {presetIcons.map((icon) => {
+                      const isSelected = logoImage === icon.svg;
+                      return (
                         <button
                           key={icon.id}
                           onClick={() => setLogoImage(icon.svg)}
                           style={{
                             padding: '0.75rem',
-                            background: 'rgba(255, 255, 255, 0.03)',
-                            border: '2px solid rgba(255, 255, 255, 0.08)',
+                            background: isSelected ? 'rgba(107, 114, 128, 0.3)' : 'rgba(255, 255, 255, 0.03)',
+                            border: isSelected ? '2px solid #6B7280' : '2px solid rgba(255, 255, 255, 0.08)',
                             borderRadius: '10px',
                             cursor: 'pointer',
                             transition: 'all 0.3s',
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
-                            gap: '0.5rem'
+                            gap: '0.5rem',
+                            position: 'relative'
                           }}
                           onMouseEnter={(e) => {
-                            e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
-                            e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+                            if (!isSelected) {
+                              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+                              e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+                            }
                             e.currentTarget.style.transform = 'scale(1.05)';
                           }}
                           onMouseLeave={(e) => {
-                            e.currentTarget.style.background = 'rgba(255, 255, 255, 0.03)';
-                            e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)';
+                            if (!isSelected) {
+                              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.03)';
+                              e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)';
+                            }
                             e.currentTarget.style.transform = 'scale(1)';
                           }}
                         >
+                          {isSelected && (
+                            <div style={{
+                              position: 'absolute',
+                              top: '4px',
+                              right: '4px',
+                              width: '20px',
+                              height: '20px',
+                              borderRadius: '50%',
+                              background: '#6B7280',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center'
+                            }}>
+                              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3">
+                                <polyline points="20 6 9 17 4 12"/>
+                              </svg>
+                            </div>
+                          )}
                           <img 
                             src={icon.svg} 
                             alt={icon.name} 
@@ -1029,20 +1053,9 @@ function App() {
                           />
                           <span style={{fontSize: '0.75rem', color: '#9CA3AF', textAlign: 'center'}}>{icon.name}</span>
                         </button>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="logo-preview">
-                      <img src={logoImage} alt="Logo" style={{maxWidth: '100px', maxHeight: '100px', borderRadius: '8px'}} />
-                      <button onClick={removeLogo} className="btn-remove-logo">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <line x1="18" y1="6" x2="6" y2="18"/>
-                          <line x1="6" y1="6" x2="18" y2="18"/>
-                        </svg>
-                        {t.removeLogo}
-                      </button>
-                    </div>
-                  )
+                      );
+                    })}
+                  </div>
                 ) : (
                   // Custom upload
                   !logoImage ? (
