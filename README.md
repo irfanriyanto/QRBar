@@ -15,11 +15,12 @@
 
 ### 🎨 Modern UI/UX
 - **Glassmorphism Design** - Elegant glass effect inspired by iOS 26
-- **Dark/Light Mode** - Seamless theme switching
+- **Dark/Light Mode** - Seamless theme switching with localStorage persistence
 - **Responsive Layout** - Works perfectly on all devices
 - **Plus Jakarta Sans Font** - Clean and modern typography
 - **2-Column Layout** - Forms on left, sticky preview on right for better workflow
 - **Real-time Preview** - See changes instantly as you customize
+- **Phone Mockup** - Samsung Galaxy S25 Ultra style preview with realistic power and volume buttons
 
 ### 🌐 Multi-Language Support
 - English (EN)
@@ -34,7 +35,7 @@
 5. **Phone** - Direct call links
 6. **SMS** - Pre-filled text messages
 7. **Social Media** - Instagram, Twitter, Facebook, TikTok, LinkedIn, YouTube
-8. **Login** - Username & password (with TAB auto-fill support)
+8. **Login** - Username & password (with newline separator for auto-fill support)
 9. **vCard** - Complete contact information
 10. **Location/Maps** - GPS coordinates or Google Maps address
 11. **WhatsApp** - Direct WhatsApp chat with pre-filled message
@@ -52,14 +53,14 @@
   - Squares (Classic)
   - Dots (Modern)
   - Rounded (Smooth)
-- **Corner Styles:**
-  - Square (Standard)
-  - Rounded (Soft)
-  - Extra Rounded (Very smooth)
+- **Corner Styles** - Visual icons showing 3 QR positioning squares:
+  - Square (Standard sharp corners)
+  - Rounded (Soft rounded corners)
+  - Extra Rounded (Very smooth, almost circular)
 
 #### Logo Integration
-- **Preset Icons** - 12 popular brand icons with original colors:
-  - Instagram, Facebook, Twitter/X, YouTube
+- **Preset Icons** - 13 popular brand icons with original colors:
+  - Instagram, Threads, Facebook, Twitter/X, YouTube
   - WhatsApp, TikTok, LinkedIn, Gmail
   - Spotify, GitHub, Telegram, Discord
 - **Custom Upload** - Upload your own logo/image
@@ -67,7 +68,7 @@
 - **Smart Selection** - Visual feedback showing selected icon
 
 #### Frame Styles
-- **No Frame** - Clean QR code only
+- **No Frame** - Clean QR code only (icon: frame with X mark)
 - **Simple** - Floating text box below QR
 - **Border** - White background with border and text
 - **Border Black** - Black background with border and white text
@@ -84,11 +85,14 @@
 ### 🎯 Key Capabilities
 - **HD Download** - High-quality PNG export (1024x1024px for QR, 5x scale for barcode)
 - **Frame-Aware Export** - Frames included in download with proper scaling
-- **Phone Mockup Preview** - Samsung Galaxy S25 Ultra style preview
-- **Auto-fill Login** - Special format for scanner auto-fill (username[TAB]password)
+- **Phone Mockup Preview** - Samsung Galaxy S25 Ultra style preview with realistic buttons
+- **Auto-fill Login** - Special format for scanner auto-fill (username[NEWLINE]password)
 - **WhatsApp Auto-format** - Automatically converts Indonesian phone format (08xxx → 628xxx)
 - **Network Access** - Access from mobile devices on same WiFi network
 - **Sticky Preview** - Preview stays visible while scrolling through options
+- **Theme Persistence** - User theme preference saved in localStorage
+- **Improved Icons** - Better visual representation for Corner Style and Frame Style options
+- **Horizontal Battery Icon** - Modern horizontal battery indicator in phone mockup (50% capacity)
 
 ---
 
@@ -159,7 +163,7 @@ npm run preview
 ```
 Option A - Preset Icons:
   1. Click "Preset Icons" tab
-  2. Select from 12 popular brand icons
+  2. Select from 13 popular brand icons (including Threads)
   3. Icons show with original brand colors
   4. Selected icon highlighted with checkmark
 
@@ -183,14 +187,14 @@ For enterprise use cases where you need to auto-fill login forms:
 
 1. Select **Login** type
 2. Enter username and password
-3. The QR code will be formatted as: `username[TAB]password[ENTER]`
+3. The QR code will be formatted as: `username[NEWLINE]password`
 4. When scanned with a barcode scanner, it will:
    - Type username in the first field
-   - Press TAB to move to password field
-   - Type password
-   - Press ENTER to submit
+   - Press ENTER/move to next field
+   - Type password in the second field
+   - Ready for manual or automatic submission
 
-**Note:** Ensure your barcode scanner is configured to send TAB character (`\t`)
+**Note:** The format uses newline separator for better compatibility with most scanners and auto-fill systems.
 
 ### WiFi QR Code
 
@@ -419,6 +423,21 @@ Future enhancements planned:
 - [ ] More preset icon packs
 - [ ] SVG export option
 - [ ] QR code templates
+- [ ] Enhanced security options for Login QR codes
+
+---
+
+## 📋 Recent Updates
+
+### Latest Features (2026)
+- ✅ Fixed Login QR format: Changed separator from TAB to NEWLINE for better scanner compatibility
+- ✅ Improved No Frame icon: Added X mark over frame box for clarity
+- ✅ Enhanced Corner Style icons: Show 3 QR positioning squares with different corner styles
+- ✅ Added realistic phone buttons: Power and volume buttons on Samsung Galaxy S25 Ultra mockup
+- ✅ Improved battery icon: Changed from vertical to horizontal orientation with 50% capacity indicator
+- ✅ Theme persistence: User theme preference now saved in localStorage
+- ✅ Added Threads logo: New social media icon in preset icons list
+- ✅ Default theme: Changed to light mode for better first-time user experience
 
 ---
 
