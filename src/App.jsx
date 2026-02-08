@@ -235,7 +235,7 @@ function App() {
         };
         return socialUrls[socialPlatform] || 'https://example.com';
       case 'login':
-        return `${loginUsername}\t${loginPassword}\n`;
+        return `${loginUsername}\n${loginPassword}`;
       case 'vcard':
         return `BEGIN:VCARD\nVERSION:3.0\nFN:${vcardName}\nTEL:${vcardPhone}\nEMAIL:${vcardEmail}\nORG:${vcardOrg}\nEND:VCARD`;
       case 'location':
