@@ -11,7 +11,10 @@ function App() {
   const [showGenerator, setShowGenerator] = useState(false);
   const [selectedType, setSelectedType] = useState('text');
   const [codeFormat, setCodeFormat] = useState('qr');
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    const savedTheme = localStorage.getItem('darkMode');
+    return savedTheme !== null ? JSON.parse(savedTheme) : false;
+  });
   const [language, setLanguage] = useState('en');
   
   const [text, setText] = useState('');
@@ -133,6 +136,7 @@ function App() {
   // Apply theme class to body
   useEffect(() => {
     document.body.className = darkMode ? 'dark-mode' : 'light-mode';
+    localStorage.setItem('darkMode', JSON.stringify(darkMode));
   }, [darkMode]);
 
   const qrTypes = [
