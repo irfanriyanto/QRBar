@@ -77,6 +77,11 @@ function App() {
       svg: 'https://cdn.simpleicons.org/instagram/E4405F'
     },
     {
+      id: 'threads',
+      name: 'Threads',
+      svg: 'https://cdn.simpleicons.org/threads/000000'
+    },
+    {
       id: 'facebook',
       name: 'Facebook',
       svg: 'https://cdn.simpleicons.org/facebook/1877F2'
