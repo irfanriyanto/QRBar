@@ -1127,8 +1127,13 @@ function App() {
                     onClick={() => setCornerStyle('square')} 
                     className={`style-btn ${cornerStyle === 'square' ? 'active' : ''}`}
                   >
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <rect x="4" y="4" width="7" height="7"/>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                      <rect x="3" y="3" width="8" height="8" rx="0"/>
+                      <rect x="5" y="5" width="4" height="4" rx="0" fill="currentColor"/>
+                      <rect x="13" y="3" width="8" height="8" rx="0"/>
+                      <rect x="15" y="5" width="4" height="4" rx="0" fill="currentColor"/>
+                      <rect x="3" y="13" width="8" height="8" rx="0"/>
+                      <rect x="5" y="15" width="4" height="4" rx="0" fill="currentColor"/>
                     </svg>
                     <span>{t.square}</span>
                   </button>
@@ -1136,8 +1141,13 @@ function App() {
                     onClick={() => setCornerStyle('rounded')} 
                     className={`style-btn ${cornerStyle === 'rounded' ? 'active' : ''}`}
                   >
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <rect x="4" y="4" width="7" height="7" rx="1.5"/>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                      <rect x="3" y="3" width="8" height="8" rx="2"/>
+                      <rect x="5" y="5" width="4" height="4" rx="1" fill="currentColor"/>
+                      <rect x="13" y="3" width="8" height="8" rx="2"/>
+                      <rect x="15" y="5" width="4" height="4" rx="1" fill="currentColor"/>
+                      <rect x="3" y="13" width="8" height="8" rx="2"/>
+                      <rect x="5" y="15" width="4" height="4" rx="1" fill="currentColor"/>
                     </svg>
                     <span>{t.rounded}</span>
                   </button>
@@ -1145,8 +1155,13 @@ function App() {
                     onClick={() => setCornerStyle('extraRounded')} 
                     className={`style-btn ${cornerStyle === 'extraRounded' ? 'active' : ''}`}
                   >
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <rect x="4" y="4" width="7" height="7" rx="3"/>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                      <rect x="3" y="3" width="8" height="8" rx="4"/>
+                      <circle cx="7" cy="7" r="2" fill="currentColor"/>
+                      <rect x="13" y="3" width="8" height="8" rx="4"/>
+                      <circle cx="17" cy="7" r="2" fill="currentColor"/>
+                      <rect x="3" y="13" width="8" height="8" rx="4"/>
+                      <circle cx="7" cy="17" r="2" fill="currentColor"/>
                     </svg>
                     <span>{t.extraRounded}</span>
                   </button>
