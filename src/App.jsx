@@ -11,7 +11,7 @@ function App() {
   const [showGenerator, setShowGenerator] = useState(false);
   const [selectedType, setSelectedType] = useState('text');
   const [codeFormat, setCodeFormat] = useState('qr');
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
   const [language, setLanguage] = useState('en');
   
   const [text, setText] = useState('');
