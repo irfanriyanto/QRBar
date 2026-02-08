@@ -1282,6 +1282,12 @@ function App() {
             <div className="preview-wrapper-gen">
               <div className="phone-mockup">
                 <div className="phone-frame">
+                  {/* Power button */}
+                  <div className="phone-button phone-power"></div>
+                  {/* Volume buttons */}
+                  <div className="phone-button phone-volume-up"></div>
+                  <div className="phone-button phone-volume-down"></div>
+                  
                   <div className="phone-notch"></div>
                   <div className="phone-screen">
                     <div className="phone-statusbar">
